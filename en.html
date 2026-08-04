@@ -65,6 +65,62 @@ nav a{
 }
 nav a:hover{background:var(--orange);color:var(--paper)}
 
+/* ---------- photographs ---------- */
+figure{margin:0 0 26px}
+figure img{
+  width:100%;border:3px solid var(--ink);border-radius:12px;
+  box-shadow:7px 7px 0 rgba(59,36,22,.20);
+}
+figcaption{
+  font-size:14px;color:var(--pine-dk);font-style:italic;
+  padding:10px 4px 0;line-height:1.5;
+}
+figcaption b{font-style:normal;font-family:Futura,sans-serif;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--pine);display:block;margin-bottom:2px}
+
+/* photo hero */
+.photohero{position:relative;border-bottom:3px double var(--ink)}
+.photohero img{
+  width:100%;height:clamp(340px,58vh,560px);object-fit:cover;display:block;
+  filter:saturate(.92) contrast(1.03);
+}
+.photohero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg, rgba(51,71,43,.30) 0%, rgba(51,71,43,.05) 38%, rgba(247,239,220,.55) 86%, var(--paper) 100%);
+}
+.photohero .plate{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;text-align:center;padding:0 22px 26px;
+}
+.photohero .plate img{
+  width:auto;height:auto;max-width:360px;max-height:190px;margin:0 auto;object-fit:contain;
+  filter:drop-shadow(0 3px 10px rgba(30,22,12,.45));
+}
+@media(max-width:640px){
+  .photohero img{height:300px}
+  .photohero .plate img{max-width:250px;max-height:140px}
+}
+
+/* full-bleed band */
+.band{position:relative;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);margin:34px 0}
+.band img{width:100%;height:clamp(240px,38vh,400px);object-fit:cover;display:block}
+.band .cap{
+  position:absolute;left:0;bottom:0;right:0;padding:26px 22px 14px;color:#f4ead0;font-size:14px;
+  font-style:italic;background:linear-gradient(transparent,rgba(28,20,12,.78));
+}
+
+/* portrait beside text */
+.founder figure{margin:0}
+.founder figure img{box-shadow:5px 5px 0 rgba(59,36,22,.22)}
+
+/* attraction photo instead of svg icon */
+.attraction figure{margin:0}
+.attraction figure img{border-width:2px;box-shadow:4px 4px 0 rgba(59,36,22,.18)}
+.attraction{grid-template-columns:280px 1fr}
+@media(max-width:760px){.attraction{grid-template-columns:1fr}}
+
+.card figure{margin:0 0 14px}
+.card figure img{border-width:2px;box-shadow:3px 3px 0 rgba(59,36,22,.18);border-radius:10px}
+
 /* ---------- hero ---------- */
 header.hero{text-align:center;padding:44px 0 20px}
 header.hero img{max-width:430px;margin:0 auto;filter:drop-shadow(0 6px 0 rgba(59,36,22,.10))}
@@ -232,13 +288,15 @@ footer a{color:var(--gold)}
   <a href="#visit">Visit</a>
 </div></nav>
 
-<header class="hero">
-  <div class="wrap">
-    <img src="assets/logo.png" alt="Chimoubongo, Québec, Canada">
-    <div class="tag">Mauricie · Québec · Canada</div>
-    <p class="sub">A town in the pines that was voted into existence by nine people and a dog, and has never once asked you to explain yourself.</p>
-  </div>
+<header class="photohero">
+  <img src="assets/road.jpg" alt="The gravel road into the pines toward Chimoubongo" fetchpriority="high">
+  <div class="plate"><img src="assets/logo.png" alt="Chimoubongo, Quebec, Canada"></div>
 </header>
+
+<div class="wrap" style="text-align:center;padding-top:28px">
+  <div class="tag">Mauricie &middot; Qu&eacute;bec &middot; Canada</div>
+  <p class="sub">A town in the pines that was voted into existence by nine people and a dog, and has never once asked you to explain yourself.</p>
+</div>
 
 <section id="story">
 <div class="wrap">
@@ -251,6 +309,14 @@ footer a{color:var(--gold)}
   <p>He parked the bus at the bend in the creek because, he later said, <em>the trees stopped talking over each other there</em>. Eight other people were with him. Their names are on the stone by the post office: Ginette, Marcel, Big Yvon, Little Yvon, Suzanne, Dee, Pauline, and a man everybody called The Dentist who was not a dentist and had, in fact, never been to one.</p>
 
   <p>There was also the dog. The dog was named Motion, because Alphonse-Réal insisted every vote needed one.</p>
+</div>
+
+<div class="band">
+  <img src="assets/bus.jpg" alt="The 1961 school bus sunk in moss beside the creek" loading="lazy">
+  <div class="cap">The bus, at The Bend, where it has been parked since 1971. Tomatoes have been coming through the roof vents for at least thirty years.</div>
+</div>
+
+<div class="wrap">
 
   <div class="pull">"A town is not a place. A town is a group of people who have agreed to keep showing up. The trees were already having a town. We just asked to join."</div>
 
@@ -275,7 +341,10 @@ footer a{color:var(--gold)}
   <h2><span class="sm">The Founder</span>Alphonse-Réal Bougie</h2>
 
   <div class="founder">
-    <div class="portrait"><span>A.-R. BOUGIE<br>c. 1974</span></div>
+    <figure>
+      <img src="assets/bougie.jpg" alt="Alphonse-Réal Bougie, 89, long white hair, dressed in black, at the forest edge" loading="lazy">
+      <figcaption><b>A.-R. Bougie</b>At the edge of the Standing Grove, last autumn. He asked that the photograph be taken there and nowhere else.</figcaption>
+    </figure>
     <div>
       <p>He is eighty-nine. He is six foot three and appears taller because of the hair, which is white, waist-length, and parted in the exact middle with a precision that people find more unsettling than if it were wild. He wears black. He has worn black since 1969, before it meant anything, and he is quietly furious that it came to mean something.</p>
 
@@ -395,6 +464,14 @@ footer a{color:var(--gold)}
 <div class="wrap">
   <h2><span class="sm">Getting Here</span>Directions, Such As They Are</h2>
   <p>Start in Shawinigan. Everyone starts in Shawinigan. Take Route 155 north along the Saint-Maurice and settle in, because the pines close over the road around Grandes-Piles and they do not open again.</p>
+</div>
+
+<div class="band">
+  <img src="assets/road.jpg" alt="The gravel road going into the pines" loading="lazy">
+  <div class="cap">Past the NOT FAR sign. From here the pavement stops and the rest of the directions stop being much use.</div>
+</div>
+
+<div class="wrap">
 
   <ol class="dir">
     <li>Follow the 155 north past Grandes-Piles. Keep the river on your left. If the river is on your right, you are going to La Tuque, which is a fine town, but it is not this one.</li>
@@ -425,6 +502,7 @@ footer a{color:var(--gold)}
 
   <div class="grid">
     <div class="card">
+      <figure><img src="assets/grove.jpg" alt="Inside the Standing Grove, uncut old white pine" loading="lazy"></figure>
       <h4>The Standing Grove</h4>
       <p>Forty-one hectares of old white pine that has never been cut, because in 1971 nine people and a dog decided it wouldn't be. Some of these trees were adults during the American Revolution. You may walk in it. You may not bring a chainsaw, a drone, or an opinion about forestry.</p>
     </div>
@@ -433,6 +511,7 @@ footer a{color:var(--gold)}
       <p>Where the bus was parked. The bus is still there, sunk to the axles, full of moss and someone's ongoing tomato experiment. You can sit in it. The fourth seat frame from the back is the good one.</p>
     </div>
     <div class="card">
+      <figure><img src="assets/soup.jpg" alt="The long Thursday Soup table at dusk, people all around it" loading="lazy"></figure>
       <h4>Thursday Soup</h4>
       <p>Every Thursday, 5 p.m., the long table behind the post office. There is always soup. Nobody organizes it. It has never once not happened. Bring a jar if you want to take some home, and bring a full jar if you want to be remembered fondly.</p>
     </div>
@@ -462,19 +541,9 @@ footer a{color:var(--gold)}
   <p>What follows is the official register of things worth stopping the car for.</p>
 
   <div class="attraction">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none" stroke-linecap="round">
-          <ellipse cx="50" cy="46" rx="13" ry="20" fill="#4f6b40"/>
-          <circle cx="50" cy="24" r="10" fill="#33472b"/>
-          <path d="M44 17 L36 4 M56 17 L64 4"/>
-          <path d="M50 66 L50 92" stroke-width="4"/>
-          <path d="M37 40 Q10 22 6 36 Q14 46 37 50" fill="rgba(230,167,44,.35)"/>
-          <path d="M63 40 Q90 22 94 36 Q86 46 63 50" fill="rgba(230,167,44,.35)"/>
-          <path d="M38 60 L20 78 M62 60 L80 78 M42 66 L34 88 M58 66 L66 88"/>
-        </g>
-      </svg>
-    </div>
+    <figure>
+      <img src="assets/mosquito.jpg" alt="The giant welded mosquito statue beside Route 155" loading="lazy">
+    </figure>
     <div>
       <h4>The World's Second-Largest Mosquito</h4>
       <p class="whereat">Route 155, north end · Free · Always visible</p>
@@ -486,19 +555,9 @@ footer a{color:var(--gold)}
   </div>
 
   <div class="attraction">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none" stroke-linecap="round">
-          <ellipse cx="50" cy="52" rx="17" ry="24" fill="#7a4a1f"/>
-          <circle cx="50" cy="26" r="13" fill="#e6a72c"/>
-          <circle cx="45" cy="23" r="4" fill="#3b2416" stroke="none"/>
-          <circle cx="55" cy="23" r="4" fill="#3b2416" stroke="none"/>
-          <path d="M33 44 Q4 30 4 48 Q18 58 34 54" fill="rgba(59,36,22,.25)"/>
-          <path d="M67 44 Q96 30 96 48 Q82 58 66 54" fill="rgba(59,36,22,.25)"/>
-          <path d="M36 68 L18 86 M64 68 L82 86 M44 74 L38 94 M56 74 L62 94"/>
-        </g>
-      </svg>
-    </div>
+    <figure>
+      <img src="assets/statues.jpg" alt="The giant horsefly beside the mosquito, visibly larger" loading="lazy">
+    </figure>
     <div>
       <h4>The World's Largest Horsefly</h4>
       <p class="whereat">Directly beside the mosquito · Free · Casts a shadow on it</p>
@@ -551,19 +610,9 @@ footer a{color:var(--gold)}
   </div>
 
   <div class="attraction">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none" stroke-linecap="round">
-          <rect x="12" y="40" width="76" height="32" rx="6" fill="#e6a72c"/>
-          <rect x="20" y="46" width="14" height="12" fill="#efe2c2"/>
-          <rect x="40" y="46" width="14" height="12" fill="#efe2c2"/>
-          <rect x="60" y="46" width="14" height="12" fill="#efe2c2"/>
-          <circle cx="30" cy="76" r="8" fill="#33472b"/>
-          <circle cx="70" cy="76" r="8" fill="#33472b"/>
-          <path d="M24 40 Q30 24 40 30 M60 40 Q68 22 78 32" stroke="#4f6b40"/>
-        </g>
-      </svg>
-    </div>
+    <figure>
+      <img src="assets/bus.jpg" alt="The 1961 school bus sunk in moss" loading="lazy">
+    </figure>
     <div>
       <h4>The Bus</h4>
       <p class="whereat">The Bend · Free · Do not attempt to start it</p>
@@ -600,6 +649,11 @@ footer a{color:var(--gold)}
 
     <p style="margin-top:22px"><strong>Visitors are welcome and are given a bat.</strong> There are only two rules and they are both taken seriously: you may not bring your own potato, and you may not bash anything that was not a potato when the day started.</p>
   </div>
+
+  <figure>
+    <img src="assets/potato.jpg" alt="The Bash of Apology: people of all ages with wooden bats in an autumn field" loading="lazy">
+    <figcaption><b>The Bash of Apology</b>Last September, the north field. The silent minute at 6 p.m., just before the fire.</figcaption>
+  </figure>
 
   <div class="grid">
     <div class="card">
@@ -666,6 +720,14 @@ footer a{color:var(--gold)}
   </div>
 
   <div class="pull" style="margin-top:34px">"We didn't build a town for people like us. We built one for people who didn't have one. Turned out that's most people, once you ask." — A.-R. Bougie, 2011</div>
+</div>
+
+<div class="band" style="margin-bottom:0">
+  <img src="assets/soup.jpg" alt="Thursday Soup, the long table behind the post office" loading="lazy">
+  <div class="cap">Last Thursday. There is always soup. Nobody organizes it.</div>
+</div>
+
+<div class="wrap">
 </div>
 </section>
 

@@ -65,6 +65,62 @@ nav a{
 }
 nav a:hover{background:var(--orange);color:var(--paper)}
 
+/* ---------- photographs ---------- */
+figure{margin:0 0 26px}
+figure img{
+  width:100%;border:3px solid var(--ink);border-radius:12px;
+  box-shadow:7px 7px 0 rgba(59,36,22,.20);
+}
+figcaption{
+  font-size:14px;color:var(--pine-dk);font-style:italic;
+  padding:10px 4px 0;line-height:1.5;
+}
+figcaption b{font-style:normal;font-family:Futura,sans-serif;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--pine);display:block;margin-bottom:2px}
+
+/* photo hero */
+.photohero{position:relative;border-bottom:3px double var(--ink)}
+.photohero img{
+  width:100%;height:clamp(340px,58vh,560px);object-fit:cover;display:block;
+  filter:saturate(.92) contrast(1.03);
+}
+.photohero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg, rgba(51,71,43,.30) 0%, rgba(51,71,43,.05) 38%, rgba(247,239,220,.55) 86%, var(--paper) 100%);
+}
+.photohero .plate{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;text-align:center;padding:0 22px 26px;
+}
+.photohero .plate img{
+  width:auto;height:auto;max-width:360px;max-height:190px;margin:0 auto;object-fit:contain;
+  filter:drop-shadow(0 3px 10px rgba(30,22,12,.45));
+}
+@media(max-width:640px){
+  .photohero img{height:300px}
+  .photohero .plate img{max-width:250px;max-height:140px}
+}
+
+/* full-bleed band */
+.band{position:relative;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);margin:34px 0}
+.band img{width:100%;height:clamp(240px,38vh,400px);object-fit:cover;display:block}
+.band .cap{
+  position:absolute;left:0;bottom:0;right:0;padding:26px 22px 14px;color:#f4ead0;font-size:14px;
+  font-style:italic;background:linear-gradient(transparent,rgba(28,20,12,.78));
+}
+
+/* portrait beside text */
+.founder figure{margin:0}
+.founder figure img{box-shadow:5px 5px 0 rgba(59,36,22,.22)}
+
+/* attraction photo instead of svg icon */
+.attraction figure{margin:0}
+.attraction figure img{border-width:2px;box-shadow:4px 4px 0 rgba(59,36,22,.18)}
+.attraction{grid-template-columns:280px 1fr}
+@media(max-width:760px){.attraction{grid-template-columns:1fr}}
+
+.card figure{margin:0 0 14px}
+.card figure img{border-width:2px;box-shadow:3px 3px 0 rgba(59,36,22,.18);border-radius:10px}
+
 /* ---------- hero ---------- */
 header.hero{text-align:center;padding:44px 0 20px}
 header.hero img{max-width:430px;margin:0 auto;filter:drop-shadow(0 6px 0 rgba(59,36,22,.10))}
@@ -232,13 +288,15 @@ footer a{color:var(--gold)}
   <a href="#visit">Visiter</a>
 </div></nav>
 
-<header class="hero">
-  <div class="wrap">
-    <img src="assets/logo.png" alt="Chimoubongo, Québec, Canada">
-    <div class="tag">Mauricie · Québec · Canada</div>
-    <p class="sub">Un village dans les pins qui a été voté en existence par neuf personnes pis un chien, et qui ne t'a jamais demandé une seule fois de t'expliquer.</p>
-  </div>
+<header class="photohero">
+  <img src="assets/road.jpg" alt="Le chemin de gravelle qui entre dans les pins vers Chimoubongo" fetchpriority="high">
+  <div class="plate"><img src="assets/logo.png" alt="Chimoubongo, Québec, Canada"></div>
 </header>
+
+<div class="wrap" style="text-align:center;padding-top:28px">
+  <div class="tag">Mauricie · Québec · Canada</div>
+  <p class="sub">Un village dans les pins qui a été voté en existence par neuf personnes pis un chien, et qui ne t'a jamais demandé une seule fois de t'expliquer.</p>
+</div>
 
 <section id="story">
 <div class="wrap">
@@ -251,6 +309,14 @@ footer a{color:var(--gold)}
   <p>Il a stationné l'autobus au coude de la crique parce que, comme y l'a dit plus tard, <em>les arbres arrêtaient de se parler par-dessus la tête là</em>. Huit autres personnes étaient avec lui. Leurs noms sont sur la pierre à côté du bureau de poste : Ginette, Marcel, Grand Yvon, P'tit Yvon, Suzanne, Dee, Pauline, pis un gars que tout le monde appelait Le Dentiste, qui était pas dentiste pantoute et qui, de fait, était jamais allé chez le dentiste de sa vie.</p>
 
   <p>Y'avait aussi le chien. Le chien s'appelait Motion, parce qu'Alphonse-Réal insistait que chaque vote en avait besoin d'une.</p>
+</div>
+
+<div class="band">
+  <img src="assets/bus.jpg" alt="L'autobus scolaire de 1961 enfoncé dans la mousse au bord de la crique" loading="lazy">
+  <div class="cap">L'autobus, au Coude, là où il est stationné depuis 1971. Les tomates poussent à travers les évents du toit depuis au moins trente ans.</div>
+</div>
+
+<div class="wrap">
 
   <div class="pull">« Un village, c'est pas une place. Un village, c'est une gang de monde qui se sont entendus pour continuer à se présenter. Les arbres avaient déjà un village. On a juste demandé pour embarquer. »</div>
 
@@ -275,7 +341,10 @@ footer a{color:var(--gold)}
   <h2><span class="sm">Le fondateur</span>Alphonse-Réal Bougie</h2>
 
   <div class="founder">
-    <div class="portrait"><span>A.-R. BOUGIE<br>v. 1974</span></div>
+    <figure>
+      <img src="assets/bougie.jpg" alt="Alphonse-Réal Bougie, 89 ans, cheveux blancs longs, habillé en noir, à la lisière des pins" loading="lazy">
+      <figcaption><b>A.-R. Bougie</b>À la lisière du Bosquet Debout, l'automne passé. Il a demandé que la photo soit prise là pis pas ailleurs.</figcaption>
+    </figure>
     <div>
       <p>Il a quatre-vingt-neuf ans. Il fait six pieds trois et il a l'air plus grand à cause des cheveux, qui sont blancs, longs jusqu'aux reins, séparés exactement au milieu avec une précision que le monde trouve plus dérangeante que s'ils étaient tout croches. Il s'habille en noir. Il s'habille en noir depuis 1969, avant que ça veuille dire de quoi, pis ça le fâche tranquillement que ça soit venu à vouloir dire de quoi.</p>
 
@@ -395,6 +464,14 @@ footer a{color:var(--gold)}
 <div class="wrap">
   <h2><span class="sm">Se rendre</span>Le chemin, mettons</h2>
   <p>Pars de Shawinigan. Tout le monde part de Shawinigan. Prends la 155 vers le nord le long du Saint-Maurice pis installe-toi comme il faut, parce que les pins se referment par-dessus le chemin aux alentours de Grandes-Piles pis y se rouvrent plus.</p>
+</div>
+
+<div class="band">
+  <img src="assets/road.jpg" alt="Le chemin de gravelle qui rentre dans les pins" loading="lazy">
+  <div class="cap">Passé la pancarte PAS LOIN. À partir d'icitte, l'asphalte arrête pis le reste des indications servent à rien.</div>
+</div>
+
+<div class="wrap">
 
   <ol class="dir">
     <li>Suis la 155 vers le nord en passant Grandes-Piles. Garde la rivière à ta gauche. Si la rivière est à ta droite, tu t'en vas à La Tuque, qui est une belle place, mais c'est pas celle-là.</li>
@@ -425,6 +502,7 @@ footer a{color:var(--gold)}
 
   <div class="grid">
     <div class="card">
+      <figure><img src="assets/grove.jpg" alt="L'intérieur du Bosquet Debout, vieux pins blancs jamais coupés" loading="lazy"></figure>
       <h4>Le Bosquet Debout</h4>
       <p>Quarante et un hectares de vieux pin blanc jamais coupé, parce qu'en 1971 neuf personnes pis un chien ont décidé que ça se ferait pas. Y'a des arbres là-dedans qui étaient adultes pendant la révolution américaine. Tu peux marcher dedans. Tu peux pas apporter de scie à chaîne, de drone, ni d'opinion sur la foresterie.</p>
     </div>
@@ -433,6 +511,7 @@ footer a{color:var(--gold)}
       <p>Où l'autobus était stationné. L'autobus est encore là, enfoncé jusqu'aux essieux, plein de mousse pis d'une expérience de tomates toujours en cours. Tu peux t'asseoir dedans. Le quatrième cadre de banc en partant d'en arrière, c'est le bon.</p>
     </div>
     <div class="card">
+      <figure><img src="assets/soup.jpg" alt="La grande table de la Soupe du Jeudi au crépuscule, du monde tout le tour" loading="lazy"></figure>
       <h4>La Soupe du Jeudi</h4>
       <p>Chaque jeudi, 17 h, la grande table en arrière du bureau de poste. Y'a toujours de la soupe. Personne l'organise. Ç'a jamais manqué une seule fois. Apporte un pot si tu veux en rapporter, pis apporte un pot plein si tu veux qu'on se souvienne de toi avec affection.</p>
     </div>
@@ -462,19 +541,9 @@ footer a{color:var(--gold)}
   <p>Ce qui suit est le registre officiel des affaires qui valent la peine d'arrêter le char.</p>
 
   <div class="attraction">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none" stroke-linecap="round">
-          <ellipse cx="50" cy="46" rx="13" ry="20" fill="#4f6b40"/>
-          <circle cx="50" cy="24" r="10" fill="#33472b"/>
-          <path d="M44 17 L36 4 M56 17 L64 4"/>
-          <path d="M50 66 L50 92" stroke-width="4"/>
-          <path d="M37 40 Q10 22 6 36 Q14 46 37 50" fill="rgba(230,167,44,.35)"/>
-          <path d="M63 40 Q90 22 94 36 Q86 46 63 50" fill="rgba(230,167,44,.35)"/>
-          <path d="M38 60 L20 78 M62 60 L80 78 M42 66 L34 88 M58 66 L66 88"/>
-        </g>
-      </svg>
-    </div>
+    <figure>
+      <img src="assets/mosquito.jpg" alt="La statue du maringouin géant soudée en bord de la route 155" loading="lazy">
+    </figure>
     <div>
       <h4>Le Deuxième Plus Gros Maringouin au Monde</h4>
       <p class="whereat">Route 155, bout nord · Gratuit · Visible en tout temps</p>
@@ -486,19 +555,9 @@ footer a{color:var(--gold)}
   </div>
 
   <div class="attraction">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none" stroke-linecap="round">
-          <ellipse cx="50" cy="52" rx="17" ry="24" fill="#7a4a1f"/>
-          <circle cx="50" cy="26" r="13" fill="#e6a72c"/>
-          <circle cx="45" cy="23" r="4" fill="#3b2416" stroke="none"/>
-          <circle cx="55" cy="23" r="4" fill="#3b2416" stroke="none"/>
-          <path d="M33 44 Q4 30 4 48 Q18 58 34 54" fill="rgba(59,36,22,.25)"/>
-          <path d="M67 44 Q96 30 96 48 Q82 58 66 54" fill="rgba(59,36,22,.25)"/>
-          <path d="M36 68 L18 86 M64 68 L82 86 M44 74 L38 94 M56 74 L62 94"/>
-        </g>
-      </svg>
-    </div>
+    <figure>
+      <img src="assets/statues.jpg" alt="La mouche à chevreuil géante à côté du maringouin, visiblement plus grosse" loading="lazy">
+    </figure>
     <div>
       <h4>La Plus Grosse Mouche à Chevreuil au Monde</h4>
       <p class="whereat">Juste à côté du maringouin · Gratuit · Y fait de l'ombre dessus</p>
@@ -551,19 +610,9 @@ footer a{color:var(--gold)}
   </div>
 
   <div class="attraction">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none" stroke-linecap="round">
-          <rect x="12" y="40" width="76" height="32" rx="6" fill="#e6a72c"/>
-          <rect x="20" y="46" width="14" height="12" fill="#efe2c2"/>
-          <rect x="40" y="46" width="14" height="12" fill="#efe2c2"/>
-          <rect x="60" y="46" width="14" height="12" fill="#efe2c2"/>
-          <circle cx="30" cy="76" r="8" fill="#33472b"/>
-          <circle cx="70" cy="76" r="8" fill="#33472b"/>
-          <path d="M24 40 Q30 24 40 30 M60 40 Q68 22 78 32" stroke="#4f6b40"/>
-        </g>
-      </svg>
-    </div>
+    <figure>
+      <img src="assets/bus.jpg" alt="L'autobus scolaire de 1961 enfoncé dans la mousse" loading="lazy">
+    </figure>
     <div>
       <h4>L'Autobus</h4>
       <p class="whereat">Le Coude · Gratuit · Essaie pas de le partir</p>
@@ -600,6 +649,11 @@ footer a{color:var(--gold)}
 
     <p style="margin-top:22px"><strong>Les visiteurs sont les bienvenus pis on leur donne un bâton.</strong> Y'a juste deux règles pis les deux sont prises au sérieux : t'as pas le droit d'apporter ta propre patate, pis t'as pas le droit de battre quoi que ce soit qui était pas une patate au début de la journée.</p>
   </div>
+
+  <figure>
+    <img src="assets/potato.jpg" alt="La Battue des Excuses : du monde de tous les âges avec des bâtons de bois dans un champ d'automne" loading="lazy">
+    <figcaption><b>La Battue des Excuses</b>Septembre passé, le champ nord. La minute de silence à 18 h, juste avant le feu.</figcaption>
+  </figure>
 
   <div class="grid">
     <div class="card">
@@ -666,6 +720,14 @@ footer a{color:var(--gold)}
   </div>
 
   <div class="pull" style="margin-top:34px">« On a pas bâti un village pour du monde comme nous autres. On en a bâti un pour le monde qui en avait pas. Ça s'adonne que c'est la plupart du monde, une fois que tu demandes. » — A.-R. Bougie, 2011</div>
+</div>
+
+<div class="band" style="margin-bottom:0">
+  <img src="assets/soup.jpg" alt="La Soupe du Jeudi, la grande table en arrière du bureau de poste" loading="lazy">
+  <div class="cap">Jeudi passé. Y'a toujours de la soupe. Personne l'organise.</div>
+</div>
+
+<div class="wrap">
 </div>
 </section>
 
