@@ -14,293 +14,460 @@
 <meta property="og:image" content="assets/logo.png">
 <style>
 :root{
-  --ink:#3b2416;
-  --paper:#f7efdc;
-  --paper2:#f0e3c6;
-  --orange:#d95f2b;
-  --gold:#e6a72c;
-  --pine:#4f6b40;
-  --pine-dk:#33472b;
-  --rule:#c9bb96;
+  --ink:#221c15;
+  --ink-soft:#5c5347;
+  --paper:#faf7f0;
+  --paper2:#f2ede1;
+  --line:#e0d9c8;
+  --pine:#2f4230;
+  --pine-lt:#4a6349;
+  --moss:#7d8a5c;
+  --clay:#b4552d;
+  --gold:#c08a2e;
+  --shadow:rgba(34,28,21,.10);
+
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+
+  --hd:clamp(2.6rem,7vw,5.4rem);
+  --h2:clamp(1.9rem,4vw,3.1rem);
+  --h3:clamp(1.3rem,2.2vw,1.7rem);
+
+  --gap:clamp(56px,9vw,132px);
+  --wrap:1180px;
+  --measure:660px;
 }
+
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
-  font-size:18px;
-  line-height:1.7;
-  background-image:
-    radial-gradient(circle at 20% 10%, rgba(214,160,60,.10), transparent 45%),
-    radial-gradient(circle at 85% 60%, rgba(79,107,64,.12), transparent 40%);
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:19px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
 }
 img{max-width:100%;display:block}
-a{color:var(--orange)}
+a{color:var(--clay);text-underline-offset:3px}
+h1,h2,h3,h4{line-height:1.1;margin:0}
+p{margin:0 0 1.15em}
 
-/* grain */
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.35;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='.5'/></svg>");
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+.measure{max-width:var(--measure)}
+.center{margin-left:auto;margin-right:auto}
+
+/* eyebrow / small caps label */
+.eyebrow{
+  font-family:var(--sans);font-size:12px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--moss);
+  margin:0 0 18px;
 }
-
-.wrap{max-width:940px;margin:0 auto;padding:0 22px}
 
 /* ---------- top bar ---------- */
 .topbar{
-  background:var(--pine-dk);color:#f3e9d2;font-size:14px;letter-spacing:.14em;
-  text-transform:uppercase;text-align:center;padding:9px 12px;
-  font-family:Futura,"Century Gothic",Helvetica,sans-serif;
+  background:var(--pine);color:#e9e3d2;
+  font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;
+  padding:11px 0;position:relative;z-index:30;
 }
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.topbar .tw{opacity:.72}
+.langbar{display:flex;gap:2px;flex:none}
+.langbar a{
+  color:#e9e3d2;text-decoration:none;padding:3px 9px;border-radius:2px;
+  letter-spacing:.16em;opacity:.55;transition:opacity .2s,background .2s;
+}
+.langbar a:hover{opacity:1}
+.langbar a.on{opacity:1;background:rgba(255,255,255,.16)}
+@media(max-width:700px){
+  .topbar .tw{display:none}
+  .topbar .wrap{justify-content:center}
+}
+
+/* ---------- nav ---------- */
 nav{
-  position:sticky;top:0;z-index:10;background:var(--paper2);
-  border-bottom:3px double var(--ink);
+  position:sticky;top:0;z-index:25;
+  background:rgba(250,247,240,.88);backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line);
 }
-nav .wrap{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 22px}
-nav a{
-  color:var(--ink);text-decoration:none;font-size:13px;letter-spacing:.12em;
-  text-transform:uppercase;font-family:Futura,"Century Gothic",Helvetica,sans-serif;
-  padding:5px 10px;border-radius:20px;
+nav .wrap{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px);
+  padding-top:0;padding-bottom:0;height:62px;overflow-x:auto;scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav .brand{
+  display:flex;align-items:center;gap:10px;flex:none;margin-right:auto;
+  text-decoration:none;color:var(--ink);
 }
-nav a:hover{background:var(--orange);color:var(--paper)}
-
-/* ---------- photographs ---------- */
-figure{margin:0 0 26px}
-figure img{
-  width:100%;border:3px solid var(--ink);border-radius:12px;
-  box-shadow:7px 7px 0 rgba(59,36,22,.20);
+nav .brand img{height:34px;width:auto}
+nav .brand span{
+  font-family:var(--sans);font-weight:700;font-size:13px;
+  letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;
 }
-figcaption{
-  font-size:14px;color:var(--pine-dk);font-style:italic;
-  padding:10px 4px 0;line-height:1.5;
+nav a.nl{
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;text-decoration:none;color:var(--ink-soft);
+  white-space:nowrap;flex:none;padding:6px 0;border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;
 }
-figcaption b{font-style:normal;font-family:Futura,sans-serif;font-size:12px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--pine);display:block;margin-bottom:2px}
-
-/* photo hero */
-.photohero{position:relative;border-bottom:3px double var(--ink)}
-.photohero img{
-  width:100%;height:clamp(340px,58vh,560px);object-fit:cover;display:block;
-  filter:saturate(.92) contrast(1.03);
-}
-.photohero::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg, rgba(51,71,43,.30) 0%, rgba(51,71,43,.05) 38%, rgba(247,239,220,.55) 86%, var(--paper) 100%);
-}
-.photohero .plate{
-  position:absolute;left:0;right:0;bottom:0;z-index:3;text-align:center;padding:0 22px 26px;
-}
-.photohero .plate img{
-  width:auto;height:auto;max-width:360px;max-height:190px;margin:0 auto;object-fit:contain;
-  filter:drop-shadow(0 3px 10px rgba(30,22,12,.45));
-}
-@media(max-width:640px){
-  .photohero img{height:300px}
-  .photohero .plate img{max-width:250px;max-height:140px}
-}
-
-/* full-bleed band */
-.band{position:relative;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);margin:34px 0}
-.band img{width:100%;height:clamp(240px,38vh,400px);object-fit:cover;display:block}
-.band .cap{
-  position:absolute;left:0;bottom:0;right:0;padding:26px 22px 14px;color:#f4ead0;font-size:14px;
-  font-style:italic;background:linear-gradient(transparent,rgba(28,20,12,.78));
-}
-
-/* portrait beside text */
-.founder figure{margin:0}
-.founder figure img{box-shadow:5px 5px 0 rgba(59,36,22,.22)}
-
-/* attraction photo instead of svg icon */
-.attraction figure{margin:0}
-.attraction figure img{border-width:2px;box-shadow:4px 4px 0 rgba(59,36,22,.18)}
-.attraction{grid-template-columns:280px 1fr}
-@media(max-width:760px){.attraction{grid-template-columns:1fr}}
-
-.card figure{margin:0 0 14px}
-.card figure img{border-width:2px;box-shadow:3px 3px 0 rgba(59,36,22,.18);border-radius:10px}
+nav a.nl:hover{color:var(--pine);border-bottom-color:var(--pine)}
+@media(max-width:860px){nav .brand span{display:none}}
 
 /* ---------- hero ---------- */
-header.hero{text-align:center;padding:44px 0 20px}
-header.hero img{max-width:430px;margin:0 auto;filter:drop-shadow(0 6px 0 rgba(59,36,22,.10))}
-.tag{
-  font-family:Futura,"Century Gothic",Helvetica,sans-serif;
-  letter-spacing:.3em;text-transform:uppercase;font-size:13px;color:var(--pine);
-  margin-top:14px;
+.hero{position:relative;min-height:clamp(560px,92vh,880px);display:flex;
+  align-items:center;justify-content:center;overflow:hidden;isolation:isolate}
+.hero>img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
 }
-.sub{font-size:22px;font-style:italic;max-width:640px;margin:16px auto 0}
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(180deg,rgba(20,26,18,.42) 0%,rgba(20,26,18,.14) 34%,rgba(20,26,18,.50) 76%,rgba(20,26,18,.72) 100%);
+}
+.hero .inner{text-align:center;padding:clamp(60px,10vh,110px) 22px;color:#fff;max-width:900px}
+.hero .mark{
+  width:clamp(230px,32vw,420px);height:auto;margin:0 auto clamp(26px,4vw,44px);
+  filter:drop-shadow(0 6px 26px rgba(0,0,0,.55));
+}
+.hero h1{
+  font-family:var(--sans);font-weight:800;font-size:var(--hd);
+  letter-spacing:-.02em;text-transform:uppercase;line-height:.92;
+  text-shadow:0 3px 30px rgba(0,0,0,.5);margin:0 0 22px;
+}
+.hero .lede{
+  font-size:clamp(1.05rem,1.9vw,1.4rem);line-height:1.62;max-width:620px;
+  margin:0 auto 34px;color:rgba(255,255,255,.94);
+  text-shadow:0 2px 18px rgba(0,0,0,.55);
+}
+.hero .kicker{
+  font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.26em;
+  text-transform:uppercase;color:rgba(255,255,255,.82);margin:0 0 20px;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:11px;
+  font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;text-decoration:none;
+  padding:16px 30px;border-radius:2px;
+  background:var(--paper);color:var(--ink);
+  transition:transform .2s,background .2s,color .2s;
+}
+.btn:hover{transform:translateY(-2px);background:#fff}
+.btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
+.btn.ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn .ar{font-size:15px;line-height:1}
+.herobtns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* scroll cue */
+.cue{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);text-decoration:none;display:flex;flex-direction:column;
+  align-items:center;gap:7px;
+}
+.cue i{display:block;width:1px;height:34px;background:linear-gradient(rgba(255,255,255,.7),transparent)}
 
 /* ---------- sections ---------- */
-section{padding:52px 0;border-top:3px double rgba(59,36,22,.35)}
-h2{
-  font-size:40px;line-height:1.05;margin:0 0 6px;color:var(--orange);
-  font-family:"Cooper Black","Arial Rounded MT Bold",Futura,sans-serif;
-  text-shadow:2px 2px 0 rgba(59,36,22,.18);
+section{padding:var(--gap) 0}
+section.tight{padding:clamp(38px,6vw,72px) 0}
+.sechead{margin-bottom:clamp(34px,5vw,62px)}
+.sechead h2{
+  font-family:var(--sans);font-weight:800;font-size:var(--h2);
+  letter-spacing:-.02em;text-transform:uppercase;
 }
-h2 .sm{display:block;font-size:13px;letter-spacing:.28em;color:var(--pine);
-  text-transform:uppercase;font-family:Futura,sans-serif;text-shadow:none;margin-bottom:8px}
-h3{font-size:24px;margin:30px 0 6px;color:var(--pine-dk)}
-p{margin:0 0 16px}
+.sechead .dek{
+  font-size:1.12rem;color:var(--ink-soft);max-width:var(--measure);margin:18px 0 0;
+}
+h3{font-family:var(--sans);font-weight:700;font-size:var(--h3);letter-spacing:-.01em;margin:0 0 14px}
+h4{font-family:var(--sans);font-weight:700;font-size:1.02rem;letter-spacing:.01em;margin:0 0 9px}
 
+.alt{background:var(--paper2)}
+.dark{background:var(--pine);color:#ece7d8}
+.dark .sechead h2,.dark h3,.dark h4{color:#fff}
+.dark .eyebrow{color:var(--moss)}
+.dark .dek,.dark p{color:rgba(236,231,216,.82)}
+.dark a{color:#e8c98a}
+
+hr.rule{border:0;border-top:1px solid var(--line);margin:0}
+
+/* ---------- editorial two-column ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,74px);align-items:center}
+.split.narrowimg{grid-template-columns:.85fr 1fr}
+@media(max-width:880px){.split,.split.narrowimg{grid-template-columns:1fr;gap:32px}}
+
+/* ---------- photography ---------- */
+figure{margin:0}
+figure img{width:100%;border-radius:3px}
+figcaption{
+  font-family:var(--sans);font-size:12px;letter-spacing:.04em;color:var(--ink-soft);
+  padding-top:12px;line-height:1.55;
+}
+figcaption b{
+  display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--moss);margin-bottom:4px;
+}
+.dark figcaption{color:rgba(236,231,216,.66)}
+
+/* full-bleed cinematic band */
+.band{position:relative;isolation:isolate;margin:0}
+.band img{width:100%;height:clamp(340px,62vh,660px);object-fit:cover}
+.band .cap{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:clamp(40px,9vw,90px) clamp(20px,5vw,56px) clamp(26px,4vw,46px);
+  background:linear-gradient(transparent,rgba(18,22,16,.78));
+  color:#fff;
+}
+.band .cap .in{max-width:var(--wrap);margin:0 auto}
+.band .cap h3{color:#fff;margin-bottom:8px;max-width:640px}
+.band .cap p{
+  font-family:var(--sans);font-size:13px;letter-spacing:.03em;
+  color:rgba(255,255,255,.8);max-width:560px;margin:0;
+}
+
+/* parallax-ish fixed band */
+.fixedband{
+  min-height:clamp(380px,64vh,620px);display:flex;align-items:center;
+  background-size:cover;background-position:center;background-attachment:fixed;
+  position:relative;isolation:isolate;
+}
+@media(hover:none){.fixedband{background-attachment:scroll}}
+.fixedband::after{content:"";position:absolute;inset:0;z-index:-1;background:rgba(18,24,16,.52)}
+.fixedband .quote{
+  max-width:820px;margin:0 auto;text-align:center;color:#fff;
+  padding:clamp(50px,8vw,90px) clamp(20px,5vw,56px);
+}
+.fixedband .quote p{
+  font-size:clamp(1.4rem,3.2vw,2.35rem);line-height:1.34;font-style:italic;
+  margin:0 0 22px;text-shadow:0 2px 24px rgba(0,0,0,.5);
+}
+.fixedband .quote cite{
+  font-family:var(--sans);font-style:normal;font-size:11px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.75);
+}
+
+/* ---------- cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(288px,1fr));gap:clamp(22px,3vw,38px)}
+.card{background:transparent}
+.card figure{overflow:hidden;border-radius:3px;margin-bottom:18px}
+.card figure img{
+  aspect-ratio:4/3;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.card:hover figure img{transform:scale(1.045)}
+.card h4{font-size:1.16rem;margin-bottom:8px}
+.card p{font-size:.97rem;color:var(--ink-soft);margin:0}
+.dark .card p{color:rgba(236,231,216,.76)}
+
+.cards.plain .card{
+  padding:30px 28px;background:var(--paper);border:1px solid var(--line);border-radius:3px;
+}
+.dark .cards.plain .card{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.12)}
+
+/* ---------- attraction rows ---------- */
+.rows{display:flex;flex-direction:column;gap:clamp(44px,6vw,88px)}
+.row{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,4.5vw,62px);align-items:center}
+.row:nth-child(even) figure{order:2}
+.row figure img{aspect-ratio:3/2;object-fit:cover}
+.row .meta{
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--moss);margin:0 0 12px;
+}
+.row h3{margin-bottom:12px}
+@media(max-width:880px){
+  .row,.row:nth-child(even) figure{grid-template-columns:1fr;order:0;gap:22px}
+}
+
+/* icon-only attraction (no photo) */
+.iconrow{display:grid;grid-template-columns:104px 1fr;gap:26px;align-items:start}
+.iconrow .icon{width:104px;height:104px;opacity:.85}
+@media(max-width:600px){.iconrow{grid-template-columns:1fr}.iconrow .icon{width:78px;height:78px}}
+
+/* ---------- pull quote ---------- */
 .pull{
-  border-left:6px solid var(--gold);padding:6px 0 6px 20px;margin:26px 0;
-  font-size:22px;font-style:italic;color:var(--pine-dk);
+  border-left:2px solid var(--clay);padding:6px 0 6px 26px;margin:38px 0;
+  font-size:clamp(1.15rem,2.1vw,1.5rem);line-height:1.46;font-style:italic;color:var(--ink);
+  max-width:var(--measure);
 }
-.card{
-  background:var(--paper2);border:2px solid var(--ink);border-radius:14px;
-  padding:22px 24px;margin:22px 0;box-shadow:5px 5px 0 rgba(59,36,22,.20);
-}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.grid .card{margin:0}
-.card h4{margin:0 0 8px;font-size:19px;color:var(--orange)}
+.dark .pull{border-left-color:var(--gold);color:#fff}
 
-.founder{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:start}
-@media(max-width:640px){.founder{grid-template-columns:1fr}}
-.portrait{
-  border:3px solid var(--ink);border-radius:10px;background:var(--pine-dk);
-  aspect-ratio:3/4;display:flex;align-items:flex-end;justify-content:center;
-  color:#e8dcc0;font-size:12px;text-align:center;padding:10px;
-  font-family:Futura,sans-serif;letter-spacing:.1em;
-  background-image:linear-gradient(160deg,#4f6b40,#26331f);
-  position:relative;overflow:hidden;
+/* ---------- stats strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:34px;text-align:center}
+.stat .n{
+  font-family:var(--sans);font-weight:800;font-size:clamp(2rem,4.4vw,3.1rem);
+  letter-spacing:-.03em;line-height:1;color:var(--pine);
 }
-.portrait::before{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 60% 34% at 50% 30%, rgba(240,228,200,.90), transparent 62%),
-    radial-gradient(circle 7px at 41% 27%, #1b1b1b, transparent 70%),
-    radial-gradient(circle 7px at 59% 27%, #1b1b1b, transparent 70%),
-    linear-gradient(90deg,transparent 38%, rgba(30,24,18,.55) 40%, rgba(30,24,18,.55) 60%, transparent 62%);
+.dark .stat .n{color:#fff}
+.stat .l{
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft);margin-top:11px;
 }
-.portrait span{position:relative;z-index:2}
+.dark .stat .l{color:rgba(236,231,216,.7)}
 
-/* directions */
-ol.dir{counter-reset:d;list-style:none;padding:0;margin:0}
-ol.dir li{
-  counter-increment:d;position:relative;padding:14px 0 14px 62px;
-  border-bottom:1px dashed rgba(59,36,22,.35);
+/* ---------- lists ---------- */
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0;max-width:var(--measure)}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 26px 56px;margin:0}
+ol.steps li::before{
+  content:counter(s,decimal-leading-zero);position:absolute;left:0;top:1px;
+  font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.1em;
+  color:var(--clay);
 }
-ol.dir li::before{
-  content:counter(d);position:absolute;left:0;top:14px;
-  width:42px;height:42px;border-radius:50%;background:var(--orange);color:var(--paper);
-  display:flex;align-items:center;justify-content:center;font-size:19px;
-  font-family:Futura,sans-serif;box-shadow:3px 3px 0 rgba(59,36,22,.3);
+ol.steps li:not(:last-child)::after{
+  content:"";position:absolute;left:13px;top:26px;bottom:6px;width:1px;background:var(--line);
 }
 
-/* map */
-.map{
-  background:#efe2c2;border:3px solid var(--ink);border-radius:12px;overflow:hidden;
-  box-shadow:6px 6px 0 rgba(59,36,22,.2);
-}
-.map svg{display:block;width:100%;height:auto}
-.legend{font-size:14px;padding:14px 18px;background:var(--paper2);border-top:2px solid var(--ink)}
-.legend b{color:var(--orange)}
+ul.ticks{list-style:none;padding:0;margin:0}
+ul.ticks li{position:relative;padding:0 0 12px 26px;font-size:1rem}
+ul.ticks li::before{content:"—";position:absolute;left:0;color:var(--moss)}
 
-ul.plain{list-style:none;padding:0}
-ul.plain li{padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)}
-ul.plain li::before{content:"✦";position:absolute;left:6px;color:var(--gold)}
+/* charter numbered */
+ol.charter{list-style:none;counter-reset:c;padding:0;margin:0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px 44px}
+ol.charter li{counter-increment:c;padding-left:44px;position:relative;font-size:1rem}
+ol.charter li::before{
+  content:counter(c);position:absolute;left:0;top:-2px;
+  font-family:var(--sans);font-weight:800;font-size:1.5rem;color:var(--gold);opacity:.75;
+}
 
-.rules{counter-reset:r}
-.rules li{padding-left:36px}
-.rules li::before{content:"☘";}
-
-/* ---------- bureau de tourisme ---------- */
-.bureau{background:linear-gradient(180deg,#f3e6c6,#eeddb8)}
-.stamp{
-  display:inline-block;border:3px double var(--orange);color:var(--orange);
-  font-family:Futura,"Century Gothic",sans-serif;font-size:12px;letter-spacing:.22em;
-  text-transform:uppercase;padding:7px 14px;border-radius:4px;transform:rotate(-2deg);
-  margin-bottom:14px;background:rgba(255,255,255,.35);
-}
-.attraction{
-  display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:start;
-  background:var(--paper2);border:2px solid var(--ink);border-radius:14px;
-  padding:24px;margin:22px 0;box-shadow:5px 5px 0 rgba(59,36,22,.20);
-}
-@media(max-width:640px){.attraction{grid-template-columns:1fr}}
-.attraction h4{margin:0 0 4px;font-size:22px;color:var(--orange)}
-.attraction .whereat{
-  font-family:Futura,sans-serif;font-size:12px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--pine);margin:0 0 12px;
-}
-.icon{
-  border:3px solid var(--ink);border-radius:10px;background:#e8d9b4;
-  aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
-}
-.icon svg{width:78%;height:78%}
-.rating{font-size:13px;color:var(--pine-dk);border-top:1px dashed rgba(59,36,22,.4);padding-top:10px;margin-top:12px;font-style:italic}
-
+/* ---------- poster / feature ---------- */
 .poster{
-  background:var(--pine-dk);color:#f2e6c8;border:3px solid var(--ink);border-radius:14px;
-  padding:32px;margin:26px 0;box-shadow:6px 6px 0 rgba(59,36,22,.28);text-align:center;
+  background:var(--ink);color:#f3ecdb;border-radius:3px;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;
 }
-.poster .kicker{font-family:Futura,sans-serif;letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:var(--gold)}
-.poster h3{
-  font-family:"Cooper Black","Arial Rounded MT Bold",Futura,sans-serif;
-  font-size:44px;line-height:1;margin:10px 0 6px;color:var(--gold);text-shadow:3px 3px 0 rgba(0,0,0,.35);
-}
-.poster .when{font-style:italic;font-size:19px;margin-bottom:18px;color:#efe3c8}
-.poster p{text-align:left;color:#e9dcbe}
-.poster .pull{border-left-color:var(--gold);color:#f5ecd2}
-.sched{list-style:none;padding:0;margin:18px 0 0;text-align:left}
-.sched li{padding:9px 0;border-bottom:1px dashed rgba(242,230,200,.28);display:flex;gap:16px}
-.sched li b{color:var(--gold);font-family:Futura,sans-serif;min-width:78px;letter-spacing:.06em}
+.poster img{height:100%;width:100%;object-fit:cover;min-height:340px}
+.poster .body{padding:clamp(34px,4.6vw,62px)}
+.poster h3{color:#fff;font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:16px}
+.poster p{color:rgba(243,236,219,.8)}
+.poster .eyebrow{color:var(--gold)}
+@media(max-width:880px){.poster{grid-template-columns:1fr}.poster img{min-height:260px}}
 
-/* ---------- sélecteur de langue ---------- */
-.topbar{position:relative}
-.langbar{
-  position:absolute;right:14px;top:0;display:flex;gap:0;align-items:center;
-  font-family:Futura,"Century Gothic",Helvetica,sans-serif;font-size:12px;
-  letter-spacing:.14em;
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:rgba(243,236,219,.72);padding:clamp(56px,7vw,92px) 0 40px;
+  font-family:var(--sans);font-size:13px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;margin-bottom:52px}
+@media(max-width:760px){footer .cols{grid-template-columns:1fr;gap:32px}}
+footer img.fmark{width:132px;margin-bottom:20px;opacity:.95}
+footer h5{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:#fff;margin:0 0 14px}
+footer a{color:rgba(243,236,219,.72);text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none;padding:0;margin:0}
+footer li{margin-bottom:9px}
+footer .base{border-top:1px solid rgba(255,255,255,.12);padding-top:26px;
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:12px;
+  color:rgba(243,236,219,.5)}
+
+
+/* ---------- long-form reading rhythm ---------- */
+section .wrap>p,
+section .wrap>h3,
+section .wrap>ol.steps,
+section .wrap>ul.ticks{max-width:var(--measure)}
+section .wrap>h3{margin-top:2.4em}
+section .wrap>h3:first-of-type{margin-top:0}
+
+/* founder: portrait beside bio */
+.founder{display:grid;grid-template-columns:.78fr 1fr;gap:clamp(30px,5vw,72px);align-items:start}
+.founder figure img{aspect-ratio:2/3;object-fit:cover}
+.founder>div>p:first-child{margin-top:0}
+@media(max-width:880px){.founder{grid-template-columns:1fr;gap:28px}
+  .founder figure img{aspect-ratio:4/5}}
+
+/* two-up sub-cards inside founder */
+.founder .grid,.founder .cards{grid-template-columns:1fr 1fr;gap:26px;margin-top:34px}
+@media(max-width:620px){.founder .grid,.founder .cards{grid-template-columns:1fr}}
+
+/* map figure */
+.map{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--paper2)}
+.map svg{display:block;width:100%;height:auto}
+.legend{font-family:var(--sans);font-size:12px;color:var(--ink-soft);
+  display:flex;gap:22px;flex-wrap:wrap;padding:16px 20px;border-top:1px solid var(--line)}
+
+/* generic note box */
+.note{
+  background:var(--paper2);border-left:2px solid var(--moss);
+  padding:22px 26px;font-size:.97rem;color:var(--ink-soft);margin:30px 0;
+  max-width:var(--measure);
 }
-.langbar a{color:#f3e9d2;text-decoration:none;padding:9px 10px;opacity:.6}
-.langbar a:hover{opacity:1}
-.langbar a.on{opacity:1;color:var(--gold);font-weight:bold}
-.langbar span{color:rgba(243,233,210,.35)}
-@media(max-width:760px){
-  .langbar{position:static;justify-content:center;padding-bottom:2px}
+.dark .note{background:rgba(255,255,255,.05);border-left-color:var(--gold);color:rgba(236,231,216,.8)}
+
+/* tourism bureau strip */
+.bureaubar{
+  background:var(--pine);color:#e9e3d2;text-align:center;
+  font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;padding:14px 20px;
 }
 
-footer{
-  background:var(--pine-dk);color:#efe3c8;padding:44px 0 30px;text-align:center;
-  font-size:15px;
+/* poster/event header strip */
+.posterbar{
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--moss);text-align:center;margin-bottom:16px;
 }
-footer a{color:var(--gold)}
-.sun{
-  text-align:center;font-size:13px;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--pine);font-family:Futura,sans-serif;padding:26px 0 0;
+
+/* schedule list inside poster */
+ol.sched{list-style:none;counter-reset:x;padding:0;margin:0 0 22px}
+ol.sched li{padding:0 0 14px 0;font-size:.97rem;line-height:1.6}
+ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);display:inline-block;min-width:64px}
+
+/* practical info grid */
+.practical{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,3vw,44px)}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
 
-<div class="topbar">Jumelé avec une roche · Fondé en 1971 · Population : Assez<div class="langbar"><a href="./" class="on">FR</a><span>·</span><a href="en.html">EN</a></div></div>
+<div class="topbar"><div class="wrap">
+  <span class="tw">Jumelé avec une roche &middot; Fondé en 1971 &middot; Population : Assez</span>
+  <span class="langbar"><a href="./" class="on">FR</a><a href="en.html" class="">EN</a></span>
+</div></div>
 
 <nav><div class="wrap">
-  <a href="#story">La fondation</a>
-  <a href="#alphonse">Alphonse-Réal</a>
-  <a href="#map">Où c'est</a>
-  <a href="#directions">Le chemin</a>
-  <a href="#doing">Quoi faire</a>
-  <a href="#bureau">Bureau de tourisme</a>
-  <a href="#rules">Les règles</a>
-  <a href="#visit">Visiter</a>
+  <a class="brand" href="./">
+    <img src="assets/logo.png" alt="Chimoubongo, Québec, Canada">
+    <span>Chimoubongo</span>
+  </a>
+  <a class="nl" href="#story">La fondation</a>
+  <a class="nl" href="#alphonse">Le fondateur</a>
+  <a class="nl" href="#directions">Se rendre</a>
+  <a class="nl" href="#doing">Quoi faire</a>
+  <a class="nl" href="#bureau">Attractions</a>
+  <a class="nl" href="#rules">La charte</a>
+  <a class="nl" href="#visit">Visiter</a>
 </div></nav>
 
-<header class="photohero">
+<header class="hero">
   <img src="assets/road.jpg" alt="Le chemin de gravelle qui entre dans les pins vers Chimoubongo" fetchpriority="high">
-  <div class="plate"><img src="assets/logo.png" alt="Chimoubongo, Québec, Canada"></div>
+  <div class="inner">
+    <img class="mark" src="assets/logo.png" alt="Chimoubongo, Québec, Canada">
+    <p class="kicker">Mauricie &middot; Québec &middot; Canada</p>
+    <h1>Un village<br>dans les pins</h1>
+    <p class="lede">Voté en existence par neuf personnes pis un chien, en 1971. On t'a jamais demandé une seule fois de t'expliquer.</p>
+    <div class="herobtns">
+      <a class="btn" href="#visit">Planifie ta visite <span class="ar">&rarr;</span></a>
+      <a class="btn ghost" href="#story">L'histoire <span class="ar">&rarr;</span></a>
+    </div>
+  </div>
+  <a class="cue" href="#story"><i></i>Descends</a>
 </header>
 
-<div class="wrap" style="text-align:center;padding-top:28px">
-  <div class="tag">Mauricie · Québec · Canada</div>
-  <p class="sub">Un village dans les pins qui a été voté en existence par neuf personnes pis un chien, et qui ne t'a jamais demandé une seule fois de t'expliquer.</p>
-</div>
+<section class="tight alt">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="n">1971</div><div class="l">Fondé</div></div>
+      <div class="stat"><div class="n">41 ha</div><div class="l">De pin blanc jamais coupé</div></div>
+      <div class="stat"><div class="n">Assez</div><div class="l">Population</div></div>
+      <div class="stat"><div class="n">La plupart</div><div class="l">Heures d'ouverture</div></div>
+    </div>
+  </div>
+</section>
 
 <section id="story">
 <div class="wrap">
-  <h2><span class="sm">Chapitre premier</span>Comment on invente un village</h2>
+  <div class="sechead rv">
+    <p class="eyebrow">Chapitre premier</p>
+    <h2>Comment on invente un village</h2>
+  </div>
 
   <p>Au printemps 1971, y'avait pas de Chimoubongo. Y'avait un chemin de bûcheux, un coude dans une crique, quarante et un hectares de pin blanc que personne s'était donné la peine de couper, pis un autobus scolaire avec les bancs arrachés.</p>
 
@@ -311,14 +478,23 @@ footer a{color:var(--gold)}
   <p>Y'avait aussi le chien. Le chien s'appelait Motion, parce qu'Alphonse-Réal insistait que chaque vote en avait besoin d'une.</p>
 </div>
 
-<div class="band">
+<div class="band rv">
   <img src="assets/bus.jpg" alt="L'autobus scolaire de 1961 enfoncé dans la mousse au bord de la crique" loading="lazy">
-  <div class="cap">L'autobus, au Coude, là où il est stationné depuis 1971. Les tomates poussent à travers les évents du toit depuis au moins trente ans.</div>
+  <div class="cap"><div class="in"><p>L'autobus, au Coude, là où il est stationné depuis 1971. Les tomates poussent à travers les évents du toit depuis au moins trente ans.</p></div></div>
 </div>
 
 <div class="wrap">
 
-  <div class="pull">« Un village, c'est pas une place. Un village, c'est une gang de monde qui se sont entendus pour continuer à se présenter. Les arbres avaient déjà un village. On a juste demandé pour embarquer. »</div>
+  </div>
+
+<div class="fixedband rv" style="background-image:url('assets/grove.jpg')">
+  <div class="quote">
+    <p>&ldquo;Un village, c'est pas une place. Un village, c'est une gang de monde qui se sont entendus pour continuer à se présenter. Les arbres avaient déjà un village. On a juste demandé pour embarquer.&rdquo;</p>
+    <cite>Alphonse-Réal Bougie, 1971</cite>
+  </div>
+</div>
+
+<div class="wrap">
 
   <h3>Le Vote</h3>
   <p>La nuit du 2 juin 1971, ils ont tenu ce que la charte du village appelle encore Le Vote. Ça a duré onze heures. Y'avait exactement deux points à l'ordre du jour.</p>
@@ -336,12 +512,15 @@ footer a{color:var(--gold)}
 </div>
 </section>
 
-<section id="alphonse">
+<section id="alphonse" class="alt">
 <div class="wrap">
-  <h2><span class="sm">Le fondateur</span>Alphonse-Réal Bougie</h2>
+  <div class="sechead rv">
+    <p class="eyebrow">Le fondateur</p>
+    <h2>Alphonse-Réal Bougie</h2>
+  </div>
 
   <div class="founder">
-    <figure>
+    <figure class="rv">
       <img src="assets/bougie.jpg" alt="Alphonse-Réal Bougie, 89 ans, cheveux blancs longs, habillé en noir, à la lisière des pins" loading="lazy">
       <figcaption><b>A.-R. Bougie</b>À la lisière du Bosquet Debout, l'automne passé. Il a demandé que la photo soit prise là pis pas ailleurs.</figcaption>
     </figure>
@@ -356,7 +535,7 @@ footer a{color:var(--gold)}
     </div>
   </div>
 
-  <div class="grid">
+  <div class="cards rv">
     <div class="card">
       <h4>Habitudes connues</h4>
       <ul class="plain">
@@ -383,7 +562,10 @@ footer a{color:var(--gold)}
 
 <section id="map">
 <div class="wrap">
-  <h2><span class="sm">Géographie</span>Où c'est sur la terre</h2>
+  <div class="sechead rv">
+    <p class="eyebrow">Géographie</p>
+    <h2>Où c'est sur la terre</h2>
+  </div>
   <p>Chimoubongo est assis en Mauricie, dans le pays des pins en montant la rivière Saint-Maurice, à peu près entre Grandes-Piles pis Lac-Édouard, à l'ouest de la Réserve faunique du Saint-Maurice et loin en titi de n'importe quoi avec un service au volant. La Tuque, c'est ton dernier vrai village en montant. Shawinigan, c'est ton dernier vrai village en descendant. Entre les deux, c'est des arbres.</p>
 
   <div class="map">
@@ -462,18 +644,21 @@ footer a{color:var(--gold)}
 
 <section id="directions">
 <div class="wrap">
-  <h2><span class="sm">Se rendre</span>Le chemin, mettons</h2>
+  <div class="sechead rv">
+    <p class="eyebrow">Se rendre</p>
+    <h2>Le chemin, mettons</h2>
+  </div>
   <p>Pars de Shawinigan. Tout le monde part de Shawinigan. Prends la 155 vers le nord le long du Saint-Maurice pis installe-toi comme il faut, parce que les pins se referment par-dessus le chemin aux alentours de Grandes-Piles pis y se rouvrent plus.</p>
 </div>
 
-<div class="band">
+<div class="band rv">
   <img src="assets/road.jpg" alt="Le chemin de gravelle qui rentre dans les pins" loading="lazy">
-  <div class="cap">Passé la pancarte PAS LOIN. À partir d'icitte, l'asphalte arrête pis le reste des indications servent à rien.</div>
+  <div class="cap"><div class="in"><p>Passé la pancarte PAS LOIN. À partir d'icitte, l'asphalte arrête pis le reste des indications servent à rien.</p></div></div>
 </div>
 
 <div class="wrap">
 
-  <ol class="dir">
+  <ol class="steps rv">
     <li>Suis la 155 vers le nord en passant Grandes-Piles. Garde la rivière à ta gauche. Si la rivière est à ta droite, tu t'en vas à La Tuque, qui est une belle place, mais c'est pas celle-là.</li>
     <li>Quelque part passé Saint-Roch-de-Mékinac, la radio va perdre le poste de Trois-Rivières pis pogner de quoi entre les deux. <strong>Change-le pas.</strong> C'est le bon poste. Il joue juste icitte.</li>
     <li>Guette une pancarte peinte à la main qui dit <em>PAS LOIN</em>. Ça dit PAS LOIN depuis 1979 pis c'était déjà pas exact dans le temps. C'est une promesse, pas une mesure.</li>
@@ -496,13 +681,15 @@ footer a{color:var(--gold)}
 </div>
 </section>
 
-<section id="doing">
+<section id="doing" class="alt">
 <div class="wrap">
-  <h2><span class="sm">Pendant que t'es là</span>Quoi faire dans les arbres</h2>
+  <div class="sechead rv">
+    <p class="eyebrow">Pendant que t'es là</p>
+    <h2>Quoi faire dans les arbres</h2>
+  </div>
 
-  <div class="grid">
+  <div class="cards rv">
     <div class="card">
-      <figure><img src="assets/grove.jpg" alt="L'intérieur du Bosquet Debout, vieux pins blancs jamais coupés" loading="lazy"></figure>
       <h4>Le Bosquet Debout</h4>
       <p>Quarante et un hectares de vieux pin blanc jamais coupé, parce qu'en 1971 neuf personnes pis un chien ont décidé que ça se ferait pas. Y'a des arbres là-dedans qui étaient adultes pendant la révolution américaine. Tu peux marcher dedans. Tu peux pas apporter de scie à chaîne, de drone, ni d'opinion sur la foresterie.</p>
     </div>
@@ -511,7 +698,7 @@ footer a{color:var(--gold)}
       <p>Où l'autobus était stationné. L'autobus est encore là, enfoncé jusqu'aux essieux, plein de mousse pis d'une expérience de tomates toujours en cours. Tu peux t'asseoir dedans. Le quatrième cadre de banc en partant d'en arrière, c'est le bon.</p>
     </div>
     <div class="card">
-      <figure><img src="assets/soup.jpg" alt="La grande table de la Soupe du Jeudi au crépuscule, du monde tout le tour" loading="lazy"></figure>
+      <figure class="rv"><img src="assets/soup.jpg" alt="La grande table de la Soupe du Jeudi au crépuscule, du monde tout le tour" loading="lazy"></figure>
       <h4>La Soupe du Jeudi</h4>
       <p>Chaque jeudi, 17 h, la grande table en arrière du bureau de poste. Y'a toujours de la soupe. Personne l'organise. Ç'a jamais manqué une seule fois. Apporte un pot si tu veux en rapporter, pis apporte un pot plein si tu veux qu'on se souvienne de toi avec affection.</p>
     </div>
@@ -534,19 +721,22 @@ footer a{color:var(--gold)}
 <section id="bureau" class="bureau">
 <div class="wrap">
   <div class="stamp">Bureau de tourisme et des sentiments connexes de Chimoubongo · Heures d'ouverture : la plupart</div>
-  <h2><span class="sm">Venez voir les affaires</span>Attractions et monuments</h2>
+  <div class="sechead rv">
+    <p class="eyebrow">Venez voir les affaires</p>
+    <h2>Attractions et monuments</h2>
+  </div>
 
   <p>Le Bureau de tourisme a été fondé en 1984 par Ginette Lemay, qui trouvait que le village était modeste au point d'en être impoli. Il opère à partir d'un ancien hangar à grain avec une pancarte lettrée à la main, garde aucune heure fixe, pis répond à chaque demande écrite, éventuellement. Ginette est décédée en 2019. Le Bureau l'inscrit encore comme Directrice. Personne a eu le goût de changer ça.</p>
 
   <p>Ce qui suit est le registre officiel des affaires qui valent la peine d'arrêter le char.</p>
 
-  <div class="attraction">
-    <figure>
+  <div class="row">
+    <figure class="rv">
       <img src="assets/mosquito.jpg" alt="La statue du maringouin géant soudée en bord de la route 155" loading="lazy">
     </figure>
     <div>
-      <h4>Le Deuxième Plus Gros Maringouin au Monde</h4>
-      <p class="whereat">Route 155, bout nord · Gratuit · Visible en tout temps</p>
+      <h3>Le Deuxième Plus Gros Maringouin au Monde</h3>
+      <p class="meta">Route 155, bout nord · Gratuit · Visible en tout temps</p>
       <p>Onze mètres de la trompe à l'abdomen, soudé à partir de tuyau de ponceau, de pentures de barrière de ferme pis d'une motoneige au complet. Érigé en 1988 par Grand Yvon, qui a travaillé à partir d'une photo qu'il avait prise lui-même et qu'il a refusé de montrer à qui que ce soit.</p>
       <p>C'était supposé être le plus gros au monde. Le Bureau a fait une demande pour le titre en 1989 pis a reçu une lettre polie expliquant qu'un village au Manitoba était arrivé avant, pis était malheureusement plus gros. Chimoubongo a refusé d'allonger la statue. La position de Ginette, inscrite au procès-verbal, était que <em>« deuxième, c'est un chiffre plus honnête pis on devrait le porter. »</em></p>
       <p>La plaque dit : <strong>DEUXIÈME PLUS GROS. ON LE SAIT. ON EST CORRECTS.</strong></p>
@@ -554,13 +744,13 @@ footer a{color:var(--gold)}
     </div>
   </div>
 
-  <div class="attraction">
-    <figure>
+  <div class="row">
+    <figure class="rv">
       <img src="assets/statues.jpg" alt="La mouche à chevreuil géante à côté du maringouin, visiblement plus grosse" loading="lazy">
     </figure>
     <div>
-      <h4>La Plus Grosse Mouche à Chevreuil au Monde</h4>
-      <p class="whereat">Juste à côté du maringouin · Gratuit · Y fait de l'ombre dessus</p>
+      <h3>La Plus Grosse Mouche à Chevreuil au Monde</h3>
+      <p class="meta">Juste à côté du maringouin · Gratuit · Y fait de l'ombre dessus</p>
       <p>Quatorze mètres. Construite en 1991, trois ans plus tard, par le frère de Grand Yvon, P'tit Yvon, qui a jamais donné publiquement de motif et qui, quand on y demande, dit juste que <em>« le maringouin avait l'air tout seul. »</em> Tout le monde au village comprend que c'est pas ça qui s'est passé.</p>
       <p>La mouche à chevreuil est homologuée. Le Bureau garde le certificat encadré en arrière du comptoir pis en parle pas à moins que tu en parles. Elle est positionnée de manière à ce qu'entre 16 h et 18 h l'été, son ombre tombe complètement sur le maringouin. Grand Yvon pis P'tit Yvon mangent encore la soupe du jeudi à la même table pis en ont pas discuté depuis trente-quatre ans.</p>
       <p class="pull">La ligne officielle du Bureau est que les deux statues représentent la fraternité. Le Bureau a jamais élaboré.</p>
@@ -568,7 +758,7 @@ footer a{color:var(--gold)}
     </div>
   </div>
 
-  <div class="attraction">
+  <div class="iconrow rv">
     <div class="icon">
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <g stroke="#3b2416" stroke-width="3" fill="none">
@@ -581,14 +771,14 @@ footer a{color:var(--gold)}
     </div>
     <div>
       <h4>Le Tableau des Excuses</h4>
-      <p class="whereat">Devant le bureau de poste · Gratuit · Lis à tes risques</p>
+      <p class="meta">Devant le bureau de poste · Gratuit · Lis à tes risques</p>
       <p>Une planche de cèdre, deux mètres par un, où n'importe qui peut clouer une excuse. Y'a aucune exigence que ce soit signé, reçu, ou mérité. Y'en a qui ont quarante ans. Y'en a qui ont été posées la semaine passée. La plus vieille encore lisible dit juste : <em>« l'affaire de la grange, c'est moi, 1974. »</em></p>
       <p>On enlève jamais rien. Quand la planche est pleine, on en cloue une nouvelle par-dessus, pis le village est rendu épais de onze planches. Les visiteurs sont bienvenus d'en ajouter une. On demande aux visiteurs de pas photographier les couches plus vieilles, ce qui est appliqué par personne pis respecté par tout le monde.</p>
       <p class="rating">Le crayon de plomb est fourni. Les stylos sont découragés. Le Bureau expliquera pas pourquoi.</p>
     </div>
   </div>
 
-  <div class="attraction">
+  <div class="iconrow rv">
     <div class="icon">
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <g stroke="#3b2416" stroke-width="3" fill="none" stroke-linecap="round">
@@ -602,27 +792,27 @@ footer a{color:var(--gold)}
     </div>
     <div>
       <h4>Le Cairn qui Écoute</h4>
-      <p class="whereat">Crête nord, 1,4 km du départ du sentier · Gratuit · Apporte de l'eau</p>
+      <p class="meta">Crête nord, 1,4 km du départ du sentier · Gratuit · Apporte de l'eau</p>
       <p>Une pile de roches, à peu près deux mètres de haut, qu'Alphonse-Réal a commencée en 1972 pis à laquelle il ajoute à un rythme d'environ six roches par année depuis. Il les choisit lui-même. Il veut pas dire c'est quoi les critères. Quand la pile a été examinée par une étudiante en géologie en 2006, les roches venaient d'au moins neuf endroits distincts, dont trois qui sont pas au Québec.</p>
       <p>L'instruction du village aux visiteurs tient en une phrase, imprimée sur la pancarte du sentier pis nulle part d'autre : <strong>« Tu peux ajouter une roche si tu l'as portée plus qu'une journée. »</strong></p>
       <p class="rating">L'acoustique là-haut est bizarre pis tout le monde le remarque pis personne a de bonne explication.</p>
     </div>
   </div>
 
-  <div class="attraction">
-    <figure>
+  <div class="row">
+    <figure class="rv">
       <img src="assets/bus.jpg" alt="L'autobus scolaire de 1961 enfoncé dans la mousse" loading="lazy">
     </figure>
     <div>
-      <h4>L'Autobus</h4>
-      <p class="whereat">Le Coude · Gratuit · Essaie pas de le partir</p>
+      <h3>L'Autobus</h3>
+      <p class="meta">Le Coude · Gratuit · Essaie pas de le partir</p>
       <p>L'autobus scolaire original de 1961, les bancs arrachés, enfoncé jusqu'aux essieux, avec une expérience de tomates qui pousse à travers les évents du toit. C'est ce que le village a de plus proche d'un acte de fondation. Tu peux t'asseoir dedans. Le quatrième cadre de banc en partant d'en arrière, c'est le bon, pis le monde d'icitte va te le laisser sans rien dire.</p>
       <p>En 2011, un musée de Trois-Rivières a offert de le restaurer pis de l'héberger. L'assemblée du village sur la question a duré neuf minutes et le vote a été unanime. Alphonse-Réal, comme d'habitude, s'est abstenu.</p>
       <p class="rating">Les tomates sont communes. Prends-en deux. En prendre quatre, ça se remarque.</p>
     </div>
   </div>
 
-  <div class="poster">
+  <div class="poster rv">
     <div class="kicker">Annuel · Depuis 1976 · Achalandage : ceux qui se présentent</div>
     <h3>LA BATTUE DE PATATES</h3>
     <div class="when">Troisième samedi de septembre · Le champ en arrière du bureau de poste · Bâtons fournis</div>
@@ -631,7 +821,7 @@ footer a{color:var(--gold)}
 
     <p>Une proposition a été déposée pour tenir les patates responsables. Elle a été adoptée. Alphonse-Réal s'est abstenu, ce qui a été noté, pis il a dit une phrase du fond de la salle, ce qui a aussi été noté, pis qui est aujourd'hui peinturé sur le côté du hangar à grain :</p>
 
-    <div class="pull">« La patate a rien fait. Mais y faut bien frapper sur de quoi, pis aussi ben que ça soit de quoi qui peut pas le sentir. »</div>
+    <div class="pull rv">« La patate a rien fait. Mais y faut bien frapper sur de quoi, pis aussi ben que ça soit de quoi qui peut pas le sentir. »</div>
 
     <p>Le septembre suivant, une quarantaine de personnes se sont réunies dans le champ en arrière du bureau de poste avec des bâtons, pis ont battu deux cents kilos de patates dans la terre. Ç'a été rapporté comme étant énormément clarifiant. Ça se fait chaque année depuis.</p>
 
@@ -650,12 +840,12 @@ footer a{color:var(--gold)}
     <p style="margin-top:22px"><strong>Les visiteurs sont les bienvenus pis on leur donne un bâton.</strong> Y'a juste deux règles pis les deux sont prises au sérieux : t'as pas le droit d'apporter ta propre patate, pis t'as pas le droit de battre quoi que ce soit qui était pas une patate au début de la journée.</p>
   </div>
 
-  <figure>
+  <figure class="rv">
     <img src="assets/potato.jpg" alt="La Battue des Excuses : du monde de tous les âges avec des bâtons de bois dans un champ d'automne" loading="lazy">
     <figcaption><b>La Battue des Excuses</b>Septembre passé, le champ nord. La minute de silence à 18 h, juste avant le feu.</figcaption>
   </figure>
 
-  <div class="grid">
+  <div class="cards rv">
     <div class="card">
       <h4>Hors saison</h4>
       <p>De février à avril, le Bureau est fermé, le maringouin porte une bâche, pis la mouche à chevreuil en porte pas. P'tit Yvon a jamais donné de raison. Le Bureau a arrêté de demander.</p>
@@ -678,9 +868,12 @@ footer a{color:var(--gold)}
 </div>
 </section>
 
-<section id="rules">
+<section id="rules" class="dark">
 <div class="wrap">
-  <h2><span class="sm">La charte</span>Les règles de la maison</h2>
+  <div class="sechead rv">
+    <p class="eyebrow">La charte</p>
+    <h2>Les règles de la maison</h2>
+  </div>
   <p>Chimoubongo a pas de règlements, pas de conseil, pis pas de police. Il a neuf règles, écrites au dos d'un horaire d'autobus en 1971, pis elles ont jamais été modifiées.</p>
 
   <ol class="rules" style="list-style:none;padding:0">
@@ -699,8 +892,11 @@ footer a{color:var(--gold)}
 
 <section id="visit">
 <div class="wrap">
-  <h2><span class="sm">Pratique</span>Avant de venir</h2>
-  <div class="grid">
+  <div class="sechead rv">
+    <p class="eyebrow">Pratique</p>
+    <h2>Avant de venir</h2>
+  </div>
+  <div class="cards rv">
     <div class="card">
       <h4>Se loger</h4>
       <p>Y'a pas d'hôtel. Y'a onze chambres de libre pis y'en a quatre qui sont habituellement disponibles. Demande à la Soupe du Jeudi. Le camping dans le Bosquet Debout est permis si t'es tranquille pis que tu ressors tout, incluant les affaires qui étaient déjà là avant toi.</p>
@@ -735,16 +931,48 @@ footer a{color:var(--gold)}
 
 <footer>
   <div class="wrap">
-    <p style="font-size:20px;margin-bottom:6px"><strong>CHIMOUBONGO, QUÉBEC</strong></p>
-    <p style="opacity:.85">Mauricie · Route 155 pis la fourche de droite · Fondé par vote, le 2 juin 1971</p>
-    <p style="opacity:.85">Soupe du jeudi à cinq heures. Tout le monde est invité. Ça t'inclut, pis on le dit au sens précis.</p>
-    <p style="margin-top:24px;font-size:13px;opacity:.7">
-      Chimoubongo est une œuvre de fiction. Les pins, la rivière, Shawinigan, Grandes-Piles, Saint-Roch-de-Mékinac,
-      Lac-Édouard pis La Tuque sont tous vrais pis valent ton temps. Le village entre les deux, non.
-      <br><a href="https://chimoubongo.com">chimoubongo.com</a>
-    </p>
+    <div class="cols">
+      <div>
+        <img class="fmark" src="assets/logo.png" alt="Chimoubongo">
+        <p style="max-width:340px;margin:0">Un village dans les pins de la Mauricie. Apporte un pot. Laisse la montre dans le char.</p>
+      </div>
+      <div>
+        <h5>Le village</h5>
+        <ul>
+          <li><a href="#story">La fondation</a></li>
+          <li><a href="#alphonse">Alphonse-Réal Bougie</a></li>
+          <li><a href="#map">Où c'est</a></li>
+          <li><a href="#rules">La charte</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Visiter</h5>
+        <ul>
+          <li><a href="#directions">Se rendre</a></li>
+          <li><a href="#doing">Quoi faire</a></li>
+          <li><a href="#bureau">Attractions</a></li>
+          <li><a href="en.html">English</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>Bureau de tourisme et des sentiments connexes de Chimoubongo</span>
+      <span><a href="https://chimoubongo.com">chimoubongo.com</a></span>
+    </div>
   </div>
 </footer>
 
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches){
+    els.forEach(function(e){e.classList.add('in')});return;
+  }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})
+  },{rootMargin:'0px 0px -8% 0px',threshold:.06});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
 </body>
 </html>
