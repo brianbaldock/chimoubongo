@@ -361,6 +361,44 @@ section .wrap>h3:first-of-type{margin-top:0}
 .legend{font-family:var(--sans);font-size:12px;color:var(--ink-soft);
   display:flex;gap:22px;flex-wrap:wrap;padding:16px 20px;border-top:1px solid var(--line)}
 
+/* survey: real baked OSM tiles, two scales, with a marker overlay.
+   Tiles are baked into assets/ by tools/bake_map.py so no visitor request
+   ever reaches a tile server. Marker offsets come from that script. */
+.survey{margin-top:42px}
+.survey .pair{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:860px){.survey .pair{grid-template-columns:1fr;gap:34px}}
+
+.plate{border:1px solid var(--line);background:var(--paper2);border-radius:3px;overflow:hidden}
+.plate .frame{position:relative;overflow:hidden;background:#dfe6d4}
+.plate .frame img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.82) contrast(1.03)}
+.plate .cap{font-family:var(--sans);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-soft);padding:13px 18px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.plate .cap b{color:var(--ink);font-weight:700}
+
+/* the pin: a ring that keeps pulsing over nothing */
+.pin{position:absolute;width:0;height:0}
+.pin i{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;
+  background:var(--clay);box-shadow:0 0 0 3px rgba(250,247,240,.9),0 1px 5px rgba(0,0,0,.35)}
+.pin b{position:absolute;left:-26px;top:-26px;width:52px;height:52px;border-radius:50%;
+  border:2px dashed var(--clay);opacity:.75;animation:pinspin 26s linear infinite}
+.pin span{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;white-space:nowrap;
+  font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.16em;color:#fff;
+  background:var(--clay);padding:4px 9px;border-radius:2px;box-shadow:0 2px 8px rgba(0,0,0,.28)}
+@keyframes pinspin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.pin b{animation:none}}
+
+/* coordinate readout under the plates */
+.coords{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;margin-top:26px;overflow:hidden}
+@media(max-width:760px){.coords{grid-template-columns:1fr 1fr}}
+.coords div{background:var(--paper);padding:16px 18px}
+.coords dt{font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 5px}
+.coords dd{margin:0;font-family:var(--sans);font-size:15px;font-weight:700;color:var(--ink)}
+.attrib{font-family:var(--sans);font-size:11px;color:var(--ink-soft);margin-top:14px}
+.attrib a{color:var(--ink-soft)}
+
 /* generic note box */
 .note{
   background:var(--paper2);border-left:2px solid var(--moss);
@@ -381,12 +419,6 @@ section .wrap>h3:first-of-type{margin-top:0}
   font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.2em;
   text-transform:uppercase;color:var(--moss);text-align:center;margin-bottom:16px;
 }
-
-/* schedule list inside poster */
-ol.sched{list-style:none;counter-reset:x;padding:0;margin:0 0 22px}
-ol.sched li{padding:0 0 14px 0;font-size:.97rem;line-height:1.6}
-ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--gold);display:inline-block;min-width:64px}
 
 /* practical info grid */
 .practical{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,3vw,44px)}
@@ -435,3 +467,67 @@ ul.sched li{padding:15px 0;font-size:.97rem;line-height:1.62;
 ul.sched li b{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;
   text-transform:uppercase;color:var(--gold);min-width:0}
 @media(max-width:620px){ul.sched li{grid-template-columns:1fr;gap:4px}}
+
+/* ==================================================================
+   Lower-half pass
+   Goal: give #bureau onward the same vertical rhythm, hierarchy and
+   finish as the upper half. Replaces accumulated inline styles.
+   ================================================================== */
+
+/* --- utilities replacing inline style attributes ------------------ */
+.lede-note{margin-top:22px}
+.signoff{margin-top:26px;color:var(--ink-soft);font-size:.97rem}
+.pull.spaced{margin-top:34px}
+.band.flush{margin-bottom:0}
+footer .fnote{max-width:340px;margin:0}
+
+/* --- attraction register ------------------------------------------
+   Five 3:2 rows in a stack read as repetition. Numbering them and
+   ruling between them turns the stack into a catalogue, which is the
+   thing the Bureau claims it is keeping.                            */
+.rows.register{gap:0}
+.rows.register .row{
+  counter-increment:reg;
+  padding:clamp(40px,5.5vw,72px) 0;
+  border-top:1px solid var(--line);
+  align-items:start;
+}
+.rows.register .row:first-child{border-top:0;padding-top:clamp(16px,2vw,28px)}
+.rows.register{counter-reset:reg}
+.rows.register .row>div{position:relative}
+.rows.register .row h3::before{
+  content:counter(reg,decimal-leading-zero);
+  display:block;
+  font-family:var(--sans);font-size:11px;font-weight:800;
+  letter-spacing:.22em;color:var(--gold);
+  margin-bottom:12px;
+}
+.rows.register .row figure img{border-radius:3px}
+
+/* Alternating photo side is inherited from .row:nth-child(even).
+   Keep the text column optically centred on tall entries.          */
+@media(min-width:861px){
+  .rows.register .row{align-items:center}
+}
+
+/* --- the Battue feature section ------------------------------------
+   Split out of #bureau so the page changes background partway down
+   instead of running 7000px of one tone.                            */
+#battue{padding-top:clamp(46px,6vw,84px)}
+#battue .poster.feature{
+  box-shadow:0 18px 50px -28px var(--shadow);
+}
+
+/* --- bureau closing matter ---------------------------------------- */
+#bureau .signoff{
+  border-top:1px solid var(--line);
+  padding-top:22px;
+  max-width:var(--measure);
+}
+
+/* --- charter numerals sit better against the dark band ------------- */
+.dark ol.charter li::before{opacity:.9}
+
+/* --- section head consistency in the lower half --------------------
+   .stamp was floating loose above the sechead; tie them together.   */
+.stamp+.sechead{margin-top:6px}
