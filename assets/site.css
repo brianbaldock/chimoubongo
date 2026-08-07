@@ -521,8 +521,14 @@ footer .fnote{max-width:340px;margin:0}
    narrower one on even rows: 518px against 493px. Unnoticeable in one
    row, but this is a five-entry numbered catalogue where the photos sit
    in a vertical line, so the 25px stagger reads as sloppy. Reverse the
-   template on even rows to keep the photo column a constant width. */
-.rows.register .row:nth-child(even){grid-template-columns:1fr 1.05fr}
+   template on even rows to keep the photo column a constant width.
+
+   Scoped to the two-column breakpoint on purpose: unscoped, this rule
+   outranks the stacking rule at max-width:860px by specificity, so even
+   rows stayed side by side while odd rows stacked. */
+@media(min-width:861px){
+  .rows.register .row:nth-child(even){grid-template-columns:1fr 1.05fr}
+}
 
 /* Alternating photo side is inherited from .row:nth-child(even).
    Keep the text column optically centred on tall entries.          */
