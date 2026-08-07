@@ -506,7 +506,12 @@ footer .fnote{max-width:340px;margin:0}
   align-items:start;
 }
 .rows.register .row:first-child{border-top:0;padding-top:clamp(16px,2vw,28px)}
-.rows.register{counter-reset:reg}
+/* Keep the counter on #bureau, not on each register chunk: the band between
+   entries 03 and 04 must be a sibling of .wrap, so the register is necessarily
+   two containers. The continuation explicitly resumes at 03. */
+#bureau{counter-reset:reg}
+.rows.register{counter-reset:none}
+.rows.register.continued{counter-reset:reg 3}
 .rows.register .row>div{position:relative}
 .rows.register .row h3::before{
   content:counter(reg,decimal-leading-zero);
@@ -529,6 +534,12 @@ footer .fnote{max-width:340px;margin:0}
    rows stayed side by side while odd rows stacked. */
 @media(min-width:861px){
   .rows.register .row:nth-child(even){grid-template-columns:1fr 1.05fr}
+  /* The second chunk begins with global entry 04, so restore the global
+     odd/even photo rhythm rather than restarting it after the band. */
+  .rows.register.continued .row:nth-child(odd){grid-template-columns:1fr 1.05fr}
+  .rows.register.continued .row:nth-child(odd) figure{order:2}
+  .rows.register.continued .row:nth-child(even){grid-template-columns:1.05fr 1fr}
+  .rows.register.continued .row:nth-child(even) figure{order:0}
 }
 
 /* Alternating photo side is inherited from .row:nth-child(even).
@@ -544,12 +555,6 @@ footer .fnote{max-width:340px;margin:0}
 #battue .poster.feature{
   box-shadow:0 18px 50px -28px var(--shadow);
 }
-
-/* --- doing: one unique creek band, one even six-card grid ----------
-   A lone card photo made this grid 503/503/503/280/280/280. The band gives
-   the section its photographic break without privileging one card; the
-   modest floor keeps the six text cards equally paced when they stack. */
-#doing .cards.plain .card{min-height:308px}
 
 /* --- bureau closing matter ---------------------------------------- */
 #bureau .signoff{
