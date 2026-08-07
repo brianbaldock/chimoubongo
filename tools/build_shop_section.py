@@ -1,4 +1,4 @@
-"""Insert the baked #shop section into both pages, plus a nav link.
+"""Insert or rebuild the baked #shop section in both pages, plus nav links.
 
 Reads assets/shop.json (written by tools/bake_shop.py) and emits static
 markup: no fetch, no cart JS, no token in the page. Every buy control is a
@@ -83,7 +83,7 @@ def build(copy):
                 opts.append(f'<option value="{o["id"]}:1">{label} — {money(o["price"], p["currency"])}</option>')
 
         cards.append(f'''    <div class="good">
-      <figure><img src="{v["image"]}" alt="{p["name"]}" loading="lazy" width="1000" height="1000"></figure>
+      <figure><img src="{v["image"]}" alt="{p["name"]}" loading="lazy" width="900" height="1200"></figure>
       <div class="goodbody">
         <h4>{p["name"]}</h4>
         <p class="price">{prefix}{price}</p>
@@ -120,39 +120,45 @@ def build(copy):
 '''
 
 
-for name, copy in COPY.items():
-    path = os.path.join(ROOT, name)
-    s = open(path, encoding="utf-8").read()
+def replace_shop_section(s, copy):
+    """Insert #shop once, or replace it from the current baked catalog."""
+    anchor = '<section id="visit">'
+    assert anchor in s, "#visit anchor not found"
+    shop = build(copy)
 
     if '<section id="shop">' in s:
-        print(f"SKIP {name} (shop already present)")
-        continue
+        start = s.index('<section id="shop">')
+        end = s.index(anchor, start)
+        s = s[:start] + shop + s[end:]
+    else:
+        s = s.replace(anchor, shop + anchor, 1)
 
-    anchor = '<section id="visit">'
-    assert anchor in s, f"{name}: #visit anchor not found"
+        # Nav link, placed before Visit so shop sits next to it.
+        nav_anchor = '  <a class="nl" href="#visit">'
+        assert nav_anchor in s, "nav anchor not found"
+        s = s.replace(nav_anchor, f'  <a class="nl" href="#shop">{copy["nav"]}</a>\n{nav_anchor}', 1)
 
-    before_divs, before_secs = s.count("<div"), s.count("<section")
-    s = s.replace(anchor, build(copy) + anchor, 1)
+        # Footer link under the Visit column.
+        foot_anchor = '<li><a href="#bureau">'
+        assert foot_anchor in s, "footer anchor not found"
+        i = s.index(foot_anchor)
+        j = s.index("</li>", i) + len("</li>")
+        s = s[:j] + f'\n          <li><a href="#shop">{copy["foot"]}</a></li>' + s[j:]
 
-    # Nav link, placed before the Visiter link so shop sits next to it.
-    nav_anchor = '  <a class="nl" href="#visit">'
-    assert nav_anchor in s, f"{name}: nav anchor not found"
-    s = s.replace(nav_anchor, f'  <a class="nl" href="#shop">{copy["nav"]}</a>\n{nav_anchor}', 1)
+    assert s.count('<section id="shop">') == 1, "shop section count"
+    assert s.count("<section") == s.count("</section>"), "section balance"
+    assert s.count("<div") == s.count("</div>"), "div balance"
+    assert s.count("<form") == s.count("</form>") == 5, "form count"
+    assert s.count("<select") == s.count("</select>") == 5, "select count"
+    assert "ptkn_" not in s, "storefront token must never reach the page"
+    return s
 
-    # Footer link under the Visiter column.
-    foot_anchor = '<li><a href="#bureau">'
-    assert foot_anchor in s, f"{name}: footer anchor not found"
-    i = s.index(foot_anchor)
-    j = s.index("</li>", i) + len("</li>")
-    s = s[:j] + f'\n          <li><a href="#shop">{copy["foot"]}</a></li>' + s[j:]
 
-    assert s.count('<section id="shop">') == 1, f"{name}: shop section count"
-    assert s.count("<section") == s.count("</section>"), f"{name}: section balance"
-    assert s.count("<div") == s.count("</div>"), f"{name}: div balance"
-    assert s.count("<form") == s.count("</form>") == 5, f"{name}: form count"
-    assert s.count("<select") == s.count("</select>") == 5, f"{name}: select count"
-    assert "ptkn_" not in s, f"{name}: storefront token must never reach the page"
-    assert s.count("<section") == before_secs + 1, f"{name}: unexpected section delta"
-
-    open(path, "w", encoding="utf-8").write(s)
-    print(f"OK {name}: +1 section, +{s.count('<div') - before_divs} divs")
+if __name__ == "__main__":
+    for name, copy in COPY.items():
+        path = os.path.join(ROOT, name)
+        before = open(path, encoding="utf-8").read()
+        after = replace_shop_section(before, copy)
+        open(path, "w", encoding="utf-8").write(after)
+        action = "rebuilt" if '<section id="shop">' in before else "inserted"
+        print(f"OK {name}: {action} #shop")

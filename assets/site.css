@@ -637,11 +637,18 @@ footer .fnote{max-width:340px;margin:0}
   overflow:hidden;
 }
 .good figure{margin:0;overflow:hidden;background:var(--paper2)}
+/* Product shots are transparent 3:4 portrait art composited onto --paper2 by
+   tools/bake_shop.py. Two bugs shipped in the first pass and both showed up
+   as "poorly cut out": the alpha was flattened onto BLACK, and a forced 1/1
+   aspect-ratio with object-fit:cover cropped 25% away, cutting hems and
+   brims. Match the real 3:4 ratio and use `contain` so nothing is ever
+   sliced; the padded background is the same paper as the card, so the photo
+   has no visible edge. */
 .good figure img{
-  display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;
+  display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;
   transition:transform .7s cubic-bezier(.2,.7,.2,1);
 }
-.good:hover figure img{transform:scale(1.045)}
+.good:hover figure img{transform:scale(1.03)}
 
 /* Body is a column with the form pinned to the bottom, so cards with
    longer names still line their buy controls up across the row.      */

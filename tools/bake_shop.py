@@ -28,12 +28,13 @@ the repo or in a chat message.
 Run manually: FOURTHWALL_TOKEN=ptkn_... python3 tools/bake_shop.py
           or: python3 tools/bake_shop.py   (reads tools/.fourthwall-token)
 """
+import io
 import json
 import os
 import re
 import urllib.request
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -120,18 +121,33 @@ def main():
         src = images[0]["url"]
         fname = f"{p['slug']}.jpg"
         path = os.path.join(SHOP_IMG, fname)
+        # Fourthwall product shots are TRANSPARENT (RGBA webp) portrait images,
+        # typically 1536x2048. Two things must be handled or the cards look
+        # cheap, and both were got wrong on the first pass:
+        #
+        #   1. A bare .convert("RGB") composites transparency onto BLACK, which
+        #      put every product on a black rectangle inside a cream card. The
+        #      alpha must be composited onto the site's paper colour instead.
+        #   2. The images are 3:4 portrait. Forcing them into a square with
+        #      object-fit:cover crops 25% away and cuts off hems and brims.
+        #      They are kept portrait and the CSS matches that ratio.
+        #
+        # Saved as PNG-free flat JPEG on --paper2 so the card reads as one
+        # continuous surface with no visible photo edge.
+        PAPER2 = (242, 237, 225)  # --paper2 from assets/site.css
         if not os.path.exists(path):
             req = urllib.request.Request(src, headers={"User-Agent": "chimoubongo.com static shop bake"})
             with urllib.request.urlopen(req, timeout=60) as r:
                 raw = r.read()
-            tmp = path + ".tmp"
-            with open(tmp, "wb") as f:
-                f.write(raw)
-            img = Image.open(tmp).convert("RGB")
-            img.thumbnail((1000, 1000), Image.LANCZOS)
-            img.save(path, "JPEG", quality=82, progressive=True, optimize=True)
-            os.remove(tmp)
-            print(f"  baked {fname} ({os.path.getsize(path)} bytes)")
+            img = Image.open(io.BytesIO(raw))
+            if img.mode in ("RGBA", "LA", "P"):
+                img = img.convert("RGBA")
+                bg = Image.new("RGBA", img.size, PAPER2 + (255,))
+                img = Image.alpha_composite(bg, img)
+            img = img.convert("RGB")
+            img = ImageOps.contain(img, (900, 1200), Image.LANCZOS)
+            img.save(path, "JPEG", quality=86, progressive=True, optimize=True)
+            print(f"  baked {fname} {img.size[0]}x{img.size[1]} ({os.path.getsize(path)} bytes)")
 
         variant = {
             "colour": colour,
