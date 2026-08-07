@@ -516,6 +516,14 @@ footer .fnote{max-width:340px;margin:0}
 }
 .rows.register .row figure img{border-radius:3px}
 
+/* The base .row grid is 1.05fr 1fr and the figure alternates sides via
+   order, so the photo landed in the wider column on odd rows and the
+   narrower one on even rows: 518px against 493px. Unnoticeable in one
+   row, but this is a five-entry numbered catalogue where the photos sit
+   in a vertical line, so the 25px stagger reads as sloppy. Reverse the
+   template on even rows to keep the photo column a constant width. */
+.rows.register .row:nth-child(even){grid-template-columns:1fr 1.05fr}
+
 /* Alternating photo side is inherited from .row:nth-child(even).
    Keep the text column optically centred on tall entries.          */
 @media(min-width:861px){
