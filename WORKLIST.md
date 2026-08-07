@@ -38,6 +38,13 @@ dies with it, so every brief must be self-contained and finishable well inside
   reversed body copy and no section heading. Now story-shaped: head,
   narrative on paper, pull quote, full-bleed band, compact dark panel.
   Dark body 2524px -> 1043px. (671bf1e)
+- `#shop` product art repaired: Fourthwall's transparent 3:4 source shots are
+  composited onto `--paper2` before JPEG baking, rather than flattening black;
+  CSS uses 3:4 `contain`, preserving hems and brims. The section builder now
+  rebuilds an existing section from `shop.json`, not just inserts it once.
+  Five-card grid spread is 0px at 1280/820/390 (330x673, 349x698, 159x428),
+  with no horizontal overflow. Regression checks: `test_shop_assets.py` and
+  `test_build_shop_section.py`. (e82a8d1)
 - `ul.sched` row blowout: one row 677px vs ~81px neighbours, caused by a
   `<strong>` direct child of a grid `li` being blockified into its own row.
   Hanging indent instead. Spread 621px -> 50px. (671bf1e)
