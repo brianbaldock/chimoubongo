@@ -545,6 +545,12 @@ footer .fnote{max-width:340px;margin:0}
   box-shadow:0 18px 50px -28px var(--shadow);
 }
 
+/* --- doing: one unique creek band, one even six-card grid ----------
+   A lone card photo made this grid 503/503/503/280/280/280. The band gives
+   the section its photographic break without privileging one card; the
+   modest floor keeps the six text cards equally paced when they stack. */
+#doing .cards.plain .card{min-height:308px}
+
 /* --- bureau closing matter ---------------------------------------- */
 #bureau .signoff{
   border-top:1px solid var(--line);
