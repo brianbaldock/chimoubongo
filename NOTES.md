@@ -37,7 +37,15 @@ Components: `.hero` (full-bleed), sticky blurred `nav`, `.stats`, `.sechead`
 (parallax quote), `.row` (alternating photo + text), `.cards`, `.founder`,
 `.poster`, `ol.steps`, `ol.charter`, dark `footer`.
 
-The hand-drawn SVG map in `#map` is deliberate line art. Do not photo-swap it.
+The maps in `#map` are real OpenStreetMap tiles, baked into `assets/` by
+`tools/bake_map.py` at two scales with a marker overlay. No visitor request
+reaches a tile server, so the no-tracker promise holds and the ODbL
+attribution is rendered next to them.
+
+The hand-drawn SVG map that used to sit below them was removed on
+2026-08-07 (Brian's call). It showed the same geography as a drawing
+directly beneath real survey data, which invited the reader to compare the
+two inside one section. Its legend prose survived as `.gpsnote`.
 
 ## Rules for editing
 
