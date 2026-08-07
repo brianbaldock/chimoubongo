@@ -413,6 +413,43 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
   .rv{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
 }
+
+/* ---------- bottom-half components ---------- */
+.stamp{
+  display:inline-block;font-family:var(--sans);font-size:10px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--moss);
+  border:1px solid var(--line);border-radius:2px;padding:9px 16px;margin-bottom:30px;
+}
+.rating{
+  font-family:var(--sans);font-size:12px;letter-spacing:.04em;line-height:1.6;
+  color:var(--ink-soft);border-top:1px solid var(--line);
+  padding-top:14px;margin:22px 0 0;max-width:520px;
+}
+.poster.feature{grid-template-columns:1fr}
+.poster.feature>figure{margin:0}
+.poster.feature>figure img{
+  width:100%;height:clamp(280px,42vh,440px);object-fit:cover;border-radius:0;
+}
+.poster .kicker{
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin:0 0 16px;
+}
+.poster .when{
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(243,236,219,.6);
+  border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);
+  padding:14px 0;margin:0 0 30px;line-height:1.7;
+}
+.poster .body>p,.poster .body>ul{max-width:var(--measure)}
+.poster .pull{border-left-color:var(--gold);color:#fff;max-width:var(--measure)}
+ul.sched{list-style:none;padding:0;margin:30px 0 0;max-width:var(--measure);
+  border-top:1px solid rgba(255,255,255,.14)}
+ul.sched li{padding:15px 0;font-size:.97rem;line-height:1.62;
+  border-bottom:1px solid rgba(255,255,255,.09);color:rgba(243,236,219,.8);
+  display:grid;grid-template-columns:78px 1fr;gap:18px;align-items:baseline}
+ul.sched li b{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold);min-width:0}
+@media(max-width:620px){ul.sched li{grid-template-columns:1fr;gap:4px}}
 </style>
 <noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -689,7 +726,7 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
     <h2>Quoi faire dans les arbres</h2>
   </div>
 
-  <div class="cards rv">
+  <div class="cards plain rv">
     <div class="card">
       <h4>Le Bosquet Debout</h4>
       <p>Quarante et un hectares de vieux pin blanc jamais coupé, parce qu'en 1971 neuf personnes pis un chien ont décidé que ça se ferait pas. Y'a des arbres là-dedans qui étaient adultes pendant la révolution américaine. Tu peux marcher dedans. Tu peux pas apporter de scie à chaîne, de drone, ni d'opinion sur la foresterie.</p>
@@ -731,7 +768,8 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
 
   <p>Ce qui suit est le registre officiel des affaires qui valent la peine d'arrêter le char.</p>
 
-  <div class="row">
+  <div class="rows rv">
+<div class="row">
     <figure class="rv">
       <img src="assets/mosquito.jpg" alt="La statue du maringouin géant soudée en bord de la route 155" loading="lazy">
     </figure>
@@ -759,19 +797,12 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
     </div>
   </div>
 
-  <div class="iconrow rv">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none">
-          <rect x="30" y="18" width="40" height="64" rx="5" fill="#efe2c2"/>
-          <path d="M38 34 h24 M38 46 h24 M38 58 h16" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M50 82 L50 94" stroke-width="4"/>
-          <path d="M22 26 L30 26 M70 26 L78 26"/>
-        </g>
-      </svg>
-    </div>
+  <div class="row">
+    <figure class="rv">
+      <img src="assets/board.jpg" alt="Le Tableau des Excuses, onze planches de cèdre clouées les unes par-dessus les autres, couvertes de notes au crayon" loading="lazy">
+    </figure>
     <div>
-      <h4>Le Tableau des Excuses</h4>
+      <h3>Le Tableau des Excuses</h3>
       <p class="meta">Devant le bureau de poste · Gratuit · Lis à tes risques</p>
       <p>Une planche de cèdre, deux mètres par un, où n'importe qui peut clouer une excuse. Y'a aucune exigence que ce soit signé, reçu, ou mérité. Y'en a qui ont quarante ans. Y'en a qui ont été posées la semaine passée. La plus vieille encore lisible dit juste : <em>« l'affaire de la grange, c'est moi, 1974. »</em></p>
       <p>On enlève jamais rien. Quand la planche est pleine, on en cloue une nouvelle par-dessus, pis le village est rendu épais de onze planches. Les visiteurs sont bienvenus d'en ajouter une. On demande aux visiteurs de pas photographier les couches plus vieilles, ce qui est appliqué par personne pis respecté par tout le monde.</p>
@@ -779,20 +810,12 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
     </div>
   </div>
 
-  <div class="iconrow rv">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none" stroke-linecap="round">
-          <path d="M20 84 L50 20 L80 84" fill="#4f6b40"/>
-          <path d="M20 84 h60"/>
-          <circle cx="50" cy="44" r="7" fill="#e6a72c"/>
-          <path d="M50 20 L50 8" />
-          <path d="M42 70 Q50 62 58 70"/>
-        </g>
-      </svg>
-    </div>
+  <div class="row">
+    <figure class="rv">
+      <img src="assets/cairn.jpg" alt="Le Cairn qui Écoute, une pile de roches dépareillées de deux mètres sur la crête nord" loading="lazy">
+    </figure>
     <div>
-      <h4>Le Cairn qui Écoute</h4>
+      <h3>Le Cairn qui Écoute</h3>
       <p class="meta">Crête nord, 1,4 km du départ du sentier · Gratuit · Apporte de l'eau</p>
       <p>Une pile de roches, à peu près deux mètres de haut, qu'Alphonse-Réal a commencée en 1972 pis à laquelle il ajoute à un rythme d'environ six roches par année depuis. Il les choisit lui-même. Il veut pas dire c'est quoi les critères. Quand la pile a été examinée par une étudiante en géologie en 2006, les roches venaient d'au moins neuf endroits distincts, dont trois qui sont pas au Québec.</p>
       <p>L'instruction du village aux visiteurs tient en une phrase, imprimée sur la pancarte du sentier pis nulle part d'autre : <strong>« Tu peux ajouter une roche si tu l'as portée plus qu'une journée. »</strong></p>
@@ -812,11 +835,16 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
       <p class="rating">Les tomates sont communes. Prends-en deux. En prendre quatre, ça se remarque.</p>
     </div>
   </div>
+</div>
 
-  <div class="poster rv">
-    <div class="kicker">Annuel · Depuis 1976 · Achalandage : ceux qui se présentent</div>
+<div class="poster feature rv">
+    <figure>
+    <img src="assets/potato.jpg" alt="La Battue des Excuses : du monde de tous les âges avec des bâtons de bois dans un champ d'automne" loading="lazy">
+  </figure>
+    <div class="body">
+    <p class="kicker">Annuel · Depuis 1976 · Achalandage : ceux qui se présentent</p>
     <h3>LA BATTUE DE PATATES</h3>
-    <div class="when">Troisième samedi de septembre · Le champ en arrière du bureau de poste · Bâtons fournis</div>
+    <p class="when">Troisième samedi de septembre · Le champ en arrière du bureau de poste · Bâtons fournis</p>
 
     <p>À l'automne 1975, la récolte de patates du village a manqué. Pas de façon spectaculaire. Elles sont juste sorties petites, cireuses pis grises, pis tout le monde qui en a mangé a rapporté la même affaire, c'est-à-dire qu'y se sentaient <em>de travers</em> pendant une couple de jours après. Personne était capable de mieux décrire ça que ça. Le mot qui revenait, encore pis encore, à la table de cuisine, à la grande table, pis finalement à une assemblée formelle du village le 4 novembre, c'était <strong>les vibes</strong>. Les patates, ç'a été convenu, avaient des mauvaises vibes.</p>
 
@@ -840,11 +868,7 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
 
     <p style="margin-top:22px"><strong>Les visiteurs sont les bienvenus pis on leur donne un bâton.</strong> Y'a juste deux règles pis les deux sont prises au sérieux : t'as pas le droit d'apporter ta propre patate, pis t'as pas le droit de battre quoi que ce soit qui était pas une patate au début de la journée.</p>
   </div>
-
-  <figure class="rv">
-    <img src="assets/potato.jpg" alt="La Battue des Excuses : du monde de tous les âges avec des bâtons de bois dans un champ d'automne" loading="lazy">
-    <figcaption><b>La Battue des Excuses</b>Septembre passé, le champ nord. La minute de silence à 18 h, juste avant le feu.</figcaption>
-  </figure>
+  </div>
 
   <div class="cards rv">
     <div class="card">
@@ -877,16 +901,16 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
   </div>
   <p>Chimoubongo a pas de règlements, pas de conseil, pis pas de police. Il a neuf règles, écrites au dos d'un horaire d'autobus en 1971, pis elles ont jamais été modifiées.</p>
 
-  <ol class="rules" style="list-style:none;padding:0">
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Tout le monde est bienvenu. C'est ça la première règle au complet pis c'est la seule qui s'est jamais fait obstiner.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Bizarre, c'est correct. Bizarre, c'est même la condition attendue. Si t'es normal t'es bienvenu pareil, mais tu vas avoir à travailler un p'tit peu plus fort socialement.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Personne a à s'expliquer. Ni son nom, ni son passé, ni ce qu'y'a dans le truck.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> La cruauté, c'est la seule affaire pour laquelle on met le monde dehors. C'est arrivé deux fois. Les deux fois tranquillement.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Les arbres étaient là avant pis sont considérés comme des résidents. Y votent pas. Y'ont pas besoin.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Prends-en deux, laisses-en un. S'applique aux tomates, au bois de chauffage, aux livres, aux chaises, pis aux conseils.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Si de quoi est brisé pis que tu sais comment le réparer, c'est rendu ta job. C'est comme ça qu'on a eu un système d'eau.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> N'importe qui peut convoquer une assemblée. N'importe qui peut dormir pendant. Les deux sont respectés également.</li>
-    <li style="padding:12px 0 12px 34px;position:relative"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Quand tu pars, reviens. Pas nécessairement bientôt. Juste éventuellement.</li>
+  <ol class="charter rv">
+    <li>Tout le monde est bienvenu. C'est ça la première règle au complet pis c'est la seule qui s'est jamais fait obstiner.</li>
+    <li>Bizarre, c'est correct. Bizarre, c'est même la condition attendue. Si t'es normal t'es bienvenu pareil, mais tu vas avoir à travailler un p'tit peu plus fort socialement.</li>
+    <li>Personne a à s'expliquer. Ni son nom, ni son passé, ni ce qu'y'a dans le truck.</li>
+    <li>La cruauté, c'est la seule affaire pour laquelle on met le monde dehors. C'est arrivé deux fois. Les deux fois tranquillement.</li>
+    <li>Les arbres étaient là avant pis sont considérés comme des résidents. Y votent pas. Y'ont pas besoin.</li>
+    <li>Prends-en deux, laisses-en un. S'applique aux tomates, au bois de chauffage, aux livres, aux chaises, pis aux conseils.</li>
+    <li>Si de quoi est brisé pis que tu sais comment le réparer, c'est rendu ta job. C'est comme ça qu'on a eu un système d'eau.</li>
+    <li>N'importe qui peut convoquer une assemblée. N'importe qui peut dormir pendant. Les deux sont respectés également.</li>
+    <li>Quand tu pars, reviens. Pas nécessairement bientôt. Juste éventuellement.</li>
   </ol>
 </div>
 </section>
@@ -897,7 +921,7 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
     <p class="eyebrow">Pratique</p>
     <h2>Avant de venir</h2>
   </div>
-  <div class="cards rv">
+  <div class="cards plain rv">
     <div class="card">
       <h4>Se loger</h4>
       <p>Y'a pas d'hôtel. Y'a onze chambres de libre pis y'en a quatre qui sont habituellement disponibles. Demande à la Soupe du Jeudi. Le camping dans le Bosquet Debout est permis si t'es tranquille pis que tu ressors tout, incluant les affaires qui étaient déjà là avant toi.</p>
@@ -928,7 +952,6 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
 </div>
 </section>
 
-<div class="sun">☀ ☀ ☀</div>
 
 <footer>
   <div class="wrap">

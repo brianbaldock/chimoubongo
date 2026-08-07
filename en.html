@@ -413,6 +413,43 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
   .rv{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
 }
+
+/* ---------- bottom-half components ---------- */
+.stamp{
+  display:inline-block;font-family:var(--sans);font-size:10px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--moss);
+  border:1px solid var(--line);border-radius:2px;padding:9px 16px;margin-bottom:30px;
+}
+.rating{
+  font-family:var(--sans);font-size:12px;letter-spacing:.04em;line-height:1.6;
+  color:var(--ink-soft);border-top:1px solid var(--line);
+  padding-top:14px;margin:22px 0 0;max-width:520px;
+}
+.poster.feature{grid-template-columns:1fr}
+.poster.feature>figure{margin:0}
+.poster.feature>figure img{
+  width:100%;height:clamp(280px,42vh,440px);object-fit:cover;border-radius:0;
+}
+.poster .kicker{
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin:0 0 16px;
+}
+.poster .when{
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(243,236,219,.6);
+  border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);
+  padding:14px 0;margin:0 0 30px;line-height:1.7;
+}
+.poster .body>p,.poster .body>ul{max-width:var(--measure)}
+.poster .pull{border-left-color:var(--gold);color:#fff;max-width:var(--measure)}
+ul.sched{list-style:none;padding:0;margin:30px 0 0;max-width:var(--measure);
+  border-top:1px solid rgba(255,255,255,.14)}
+ul.sched li{padding:15px 0;font-size:.97rem;line-height:1.62;
+  border-bottom:1px solid rgba(255,255,255,.09);color:rgba(243,236,219,.8);
+  display:grid;grid-template-columns:78px 1fr;gap:18px;align-items:baseline}
+ul.sched li b{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold);min-width:0}
+@media(max-width:620px){ul.sched li{grid-template-columns:1fr;gap:4px}}
 </style>
 <noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -689,7 +726,7 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
     <h2>Things To Do In The Trees</h2>
   </div>
 
-  <div class="cards rv">
+  <div class="cards plain rv">
     <div class="card">
       <h4>The Standing Grove</h4>
       <p>Forty-one hectares of old white pine that has never been cut, because in 1971 nine people and a dog decided it wouldn't be. Some of these trees were adults during the American Revolution. You may walk in it. You may not bring a chainsaw, a drone, or an opinion about forestry.</p>
@@ -731,7 +768,8 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
 
   <p>What follows is the official register of things worth stopping the car for.</p>
 
-  <div class="row">
+  <div class="rows rv">
+<div class="row">
     <figure class="rv">
       <img src="assets/mosquito.jpg" alt="The giant welded mosquito statue beside Route 155" loading="lazy">
     </figure>
@@ -759,19 +797,12 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
     </div>
   </div>
 
-  <div class="iconrow rv">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none">
-          <rect x="30" y="18" width="40" height="64" rx="5" fill="#efe2c2"/>
-          <path d="M38 34 h24 M38 46 h24 M38 58 h16" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M50 82 L50 94" stroke-width="4"/>
-          <path d="M22 26 L30 26 M70 26 L78 26"/>
-        </g>
-      </svg>
-    </div>
+  <div class="row">
+    <figure class="rv">
+      <img src="assets/board.jpg" alt="The Apology Board, eleven cedar boards nailed over one another, covered in pencil notes" loading="lazy">
+    </figure>
     <div>
-      <h4>The Apology Board</h4>
+      <h3>The Apology Board</h3>
       <p class="meta">Outside the post office · Free · Read at your own risk</p>
       <p>A cedar board, two metres by one, where anybody may nail up an apology. There is no requirement that it be signed, received, or deserved. Some are forty years old. Some went up last week. The oldest legible one says only <em>"the barn thing, I did it, 1974."</em></p>
       <p>Nothing is ever removed. When the board fills, a new board is nailed over the top of it, and the town is now eleven boards thick. Visitors are welcome to add one. Visitors are asked not to photograph the older layers, which is enforced by nobody and observed by everybody.</p>
@@ -779,20 +810,12 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
     </div>
   </div>
 
-  <div class="iconrow rv">
-    <div class="icon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#3b2416" stroke-width="3" fill="none" stroke-linecap="round">
-          <path d="M20 84 L50 20 L80 84" fill="#4f6b40"/>
-          <path d="M20 84 h60"/>
-          <circle cx="50" cy="44" r="7" fill="#e6a72c"/>
-          <path d="M50 20 L50 8" />
-          <path d="M42 70 Q50 62 58 70"/>
-        </g>
-      </svg>
-    </div>
+  <div class="row">
+    <figure class="rv">
+      <img src="assets/cairn.jpg" alt="The Listening Cairn, a two-metre pile of mismatched stones on the north ridge" loading="lazy">
+    </figure>
     <div>
-      <h4>The Listening Cairn</h4>
+      <h3>The Listening Cairn</h3>
       <p class="meta">North ridge, 1.4 km from the trailhead · Free · Bring water</p>
       <p>A pile of stones, roughly two metres high, that Alphonse-Réal began in 1972 and has added to at a rate of about six stones a year ever since. He selects them personally. He will not say what the criteria are. When the pile was assessed by a geology student in 2006 the stones were found to come from at least nine distinct locations, three of which are not in Québec.</p>
       <p>The town's instruction to visitors is a single sentence, printed on the trail sign and nowhere else: <strong>"You may add a stone if you have carried it more than a day."</strong></p>
@@ -812,11 +835,16 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
       <p class="rating">Tomatoes are communal. Take two. Taking four is noticed.</p>
     </div>
   </div>
+</div>
 
-  <div class="poster rv">
-    <div class="kicker">Annual · Since 1976 · Attendance: Whoever Shows Up</div>
+<div class="poster feature rv">
+    <figure>
+    <img src="assets/potato.jpg" alt="The Bash of Apology: people of all ages with wooden bats in an autumn field" loading="lazy">
+  </figure>
+    <div class="body">
+    <p class="kicker">Annual · Since 1976 · Attendance: Whoever Shows Up</p>
     <h3>THE POTATO BASH</h3>
-    <div class="when">Third Saturday in September · The field behind the post office · Bats provided</div>
+    <p class="when">Third Saturday in September · The field behind the post office · Bats provided</p>
 
     <p>In the autumn of 1975, the town's potato crop failed. Not dramatically. It simply came up small, waxy and grey, and everyone who ate it reported the same thing, which was that they felt <em>off</em> for a couple of days afterward. Nobody could describe it better than that. The word that got used, over and over, at the kitchen table and the long table and eventually at a formal town meeting on the fourth of November, was <strong>vibes</strong>. The potatoes, it was agreed, had bad vibes.</p>
 
@@ -840,11 +868,7 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
 
     <p style="margin-top:22px"><strong>Visitors are welcome and are given a bat.</strong> There are only two rules and they are both taken seriously: you may not bring your own potato, and you may not bash anything that was not a potato when the day started.</p>
   </div>
-
-  <figure class="rv">
-    <img src="assets/potato.jpg" alt="The Bash of Apology: people of all ages with wooden bats in an autumn field" loading="lazy">
-    <figcaption><b>The Bash of Apology</b>Last September, the north field. The silent minute at 6 p.m., just before the fire.</figcaption>
-  </figure>
+  </div>
 
   <div class="cards rv">
     <div class="card">
@@ -877,16 +901,16 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
   </div>
   <p>Chimoubongo has no bylaws, no council, and no police. It has nine rules, written on the back of a bus schedule in 1971, and they have not been amended.</p>
 
-  <ol class="rules" style="list-style:none;padding:0">
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Everyone is welcome. That is the whole first rule and it is the only one that has never been argued about.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Weird is fine. Weird is, in fact, the expected condition. If you are normal you are also welcome, but you will have to work a little harder socially.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Nobody has to explain themselves. Not their name, not their past, not what is in the truck.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Cruelty is the only thing we throw people out for. It has happened twice. Both times quietly.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> The trees were here first and are considered residents. They do not vote. They do not need to.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Take two, leave one. Applies to tomatoes, firewood, books, chairs, and advice.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> If a thing is broken and you know how to fix it, that is now your job. This is how we got a water system.</li>
-    <li style="padding:12px 0 12px 34px;position:relative;border-bottom:1px dashed rgba(59,36,22,.3)"><span style="position:absolute;left:0;color:#e6a72c">☘</span> Anyone may call a town meeting. Anyone may sleep through one. Both are respected equally.</li>
-    <li style="padding:12px 0 12px 34px;position:relative"><span style="position:absolute;left:0;color:#e6a72c">☘</span> When you leave, come back. Not soon necessarily. Just eventually.</li>
+  <ol class="charter rv">
+    <li>Everyone is welcome. That is the whole first rule and it is the only one that has never been argued about.</li>
+    <li>Weird is fine. Weird is, in fact, the expected condition. If you are normal you are also welcome, but you will have to work a little harder socially.</li>
+    <li>Nobody has to explain themselves. Not their name, not their past, not what is in the truck.</li>
+    <li>Cruelty is the only thing we throw people out for. It has happened twice. Both times quietly.</li>
+    <li>The trees were here first and are considered residents. They do not vote. They do not need to.</li>
+    <li>Take two, leave one. Applies to tomatoes, firewood, books, chairs, and advice.</li>
+    <li>If a thing is broken and you know how to fix it, that is now your job. This is how we got a water system.</li>
+    <li>Anyone may call a town meeting. Anyone may sleep through one. Both are respected equally.</li>
+    <li>When you leave, come back. Not soon necessarily. Just eventually.</li>
   </ol>
 </div>
 </section>
@@ -897,7 +921,7 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
     <p class="eyebrow">Practical</p>
     <h2>Before You Come</h2>
   </div>
-  <div class="cards rv">
+  <div class="cards plain rv">
     <div class="card">
       <h4>Staying</h4>
       <p>There is no hotel. There are eleven spare rooms and four of them are usually free. Ask at Thursday Soup. Camping in the Standing Grove is permitted if you are quiet and take everything out, including the things that were already there before you.</p>
@@ -928,7 +952,6 @@ ol.sched li b{font-family:var(--sans);font-size:11px;letter-spacing:.16em;
 </div>
 </section>
 
-<div class="sun">☀ ☀ ☀</div>
 
 <footer>
   <div class="wrap">
