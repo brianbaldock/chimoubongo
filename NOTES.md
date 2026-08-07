@@ -59,3 +59,63 @@ The hand-drawn SVG map in `#map` is deliberate line art. Do not photo-swap it.
 - `inspect.py` — report structure and duplication across both pages
 - `extract.py` — one-shot CSS/JS extraction (already applied, kept for record)
 - `verify.py` — parity and integrity checks, run after any structural edit
+- `bake_map.py` — one-shot OpenStreetMap tile bake, not run on a schedule
+- `battue.py` — one-shot #battue restructure (applied, kept for record)
+- `doingcard.py` — one-shot #doing duplicate-photo removal (applied)
+
+## Measure, do not squint
+
+Screenshots are expensive and the aux vision model rubber-stamps "looks
+fine" regardless of actual geometry. Nearly everything that makes the page
+look amateur is a number you can read out of the DOM:
+
+```js
+// section rhythm: heights, share of page, images per section
+[...document.querySelectorAll('section')].map(s => ({
+  id: s.id, h: Math.round(s.getBoundingClientRect().height),
+  imgs: s.querySelectorAll('img').length, chars: s.innerText.length
+}))
+
+// grid raggedness: cards in one grid should be within ~30px of each other
+[...document.querySelectorAll('#doing .card')]
+  .map(c => Math.round(c.getBoundingClientRect().height))
+```
+
+Defects found this way that no screenshot would have named precisely:
+
+- `#battue` was a 2864px dark slab with 2524px of unbroken reversed body
+  copy, against a ~800px maximum run anywhere in the upper half
+- it was the only section on the page with no `.sechead`
+- one `ul.sched` row measured 677px against ~81px for its six neighbours
+- `#doing` cards measured 503/503/503/280/280/280, a 223px spread
+
+**Local preview caches `site.css` hard.** A CSS change can look like it did
+nothing. Confirm before re-debugging:
+
+```js
+const r = await fetch('assets/site.css?bust=' + Date.now());
+(await r.text()).includes('your-new-declaration')   // is the file right?
+[...document.styleSheets].flatMap(s => [...s.cssRules])
+  .filter(x => (x.selectorText||'').includes('your-selector'))  // is it live?
+```
+
+Bust it with `link.href = 'assets/site.css?b=' + Date.now()`.
+
+**Mobile without a device:** measure in a 390px iframe rather than guessing
+from media queries.
+
+```js
+const f = document.createElement('iframe');
+f.style.cssText = 'position:fixed;left:-9999px;width:390px;height:844px';
+f.src = '/?m=' + Date.now(); document.body.appendChild(f);
+// then read f.contentDocument, wait ~2s for scroll-reveal
+```
+
+## Gotcha: inline children of a grid li
+
+`ul.sched li` was `display:grid` with a `78px 1fr` template. The one entry
+containing a `<strong>` lead-in had that `<strong>` blockified into a second
+grid row, stretching the row to 677px. Setting `display:inline` on it does
+**not** help; a direct child of a grid container is always blockified. Use a
+hanging indent (`padding-left` + negative `text-indent`) for lists whose
+items may contain arbitrary inline markup.
