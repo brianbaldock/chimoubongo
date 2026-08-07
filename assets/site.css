@@ -552,8 +552,33 @@ footer .fnote{max-width:340px;margin:0}
   max-width:var(--measure);
 }
 
-/* --- charter numerals sit better against the dark band ------------- */
-.dark ol.charter li::before{opacity:.9}
+/* --- the town charter ------------------------------------------------
+   Nine rules are the town's emotional centre, not a footnote. The old
+   auto-fit grid made them three small columns at desktop width (866px for
+   the whole section). Two wider columns, a modestly larger reading size and
+   longer pauses make the list read as a charter while keeping its calm,
+   unornamented voice. */
+#rules{padding:clamp(88px,11vw,156px) 0}
+#rules .sechead{margin-bottom:clamp(36px,5vw,72px)}
+#rules>.wrap>p{
+  max-width:720px;font-size:clamp(1.08rem,1.55vw,1.28rem);line-height:1.65;
+  margin-bottom:clamp(54px,8vw,96px);
+}
+#rules ol.charter{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(38px,4.5vw,60px) clamp(44px,7vw,96px);
+}
+#rules ol.charter li{
+  padding-left:clamp(48px,4.2vw,64px);padding-top:2px;
+  font-size:clamp(1.08rem,1.45vw,1.24rem);line-height:1.6;
+}
+#rules ol.charter li::before{
+  content:counter(c,decimal-leading-zero);top:.72em;
+  font-size:11px;letter-spacing:.16em;color:#e8c98a;opacity:1;
+}
+@media(max-width:620px){
+  #rules ol.charter{grid-template-columns:1fr;gap:34px}
+}
 
 /* --- section head consistency in the lower half --------------------
    .stamp was floating loose above the sechead; tie them together.   */
