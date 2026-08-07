@@ -1,0 +1,243 @@
+{
+ "shopDomain": "chimoubongo-shop.fourthwall.com",
+ "checkoutBase": "https://chimoubongo-shop.fourthwall.com/cart/checkout",
+ "products": [
+  {
+   "key": "shirtmoubongo",
+   "name": "Shirtmoubongo",
+   "currency": "USD",
+   "priceMin": 25.94,
+   "priceMax": 31.94,
+   "variants": [
+    {
+     "colour": "Blue Spruce",
+     "options": [
+      {
+       "id": "2e470e0f-cf9b-4349-bf69-5c538f906222",
+       "size": "S",
+       "price": 25.94,
+       "available": true
+      },
+      {
+       "id": "515bd141-1e35-49d3-9a07-c687947ac04f",
+       "size": "M",
+       "price": 25.94,
+       "available": true
+      },
+      {
+       "id": "c47f1bc3-527e-4fb1-a7f3-4784243b6c06",
+       "size": "L",
+       "price": 25.94,
+       "available": true
+      },
+      {
+       "id": "bab5b677-5fcb-4ac3-94be-41a0406309e2",
+       "size": "XL",
+       "price": 25.94,
+       "available": true
+      },
+      {
+       "id": "5d903298-6ce5-41f1-8e2d-5052ed955c15",
+       "size": "2XL",
+       "price": 27.94,
+       "available": true
+      },
+      {
+       "id": "712e6105-69c9-4fab-b807-8d2847a7245f",
+       "size": "3XL",
+       "price": 29.94,
+       "available": true
+      },
+      {
+       "id": "c944a210-f71b-43b9-8449-bd69e30519c2",
+       "size": "4XL",
+       "price": 31.94,
+       "available": true
+      }
+     ],
+     "image": "assets/shop/shirtmoubongo-2.jpg"
+    },
+    {
+     "colour": "Pepper",
+     "options": [
+      {
+       "id": "0070748a-c540-452c-822c-4a416a88a841",
+       "size": "S",
+       "price": 25.94,
+       "available": true
+      },
+      {
+       "id": "f9e65425-4869-4abf-8d49-bf7dc76ab59d",
+       "size": "M",
+       "price": 25.94,
+       "available": true
+      },
+      {
+       "id": "0ae9c5c3-77b5-4e2f-a9ae-f6d7bde1ed29",
+       "size": "L",
+       "price": 25.94,
+       "available": true
+      },
+      {
+       "id": "ae0f3903-e4ab-412e-a5dc-58d028fbe058",
+       "size": "XL",
+       "price": 25.94,
+       "available": true
+      },
+      {
+       "id": "73d8531e-b44e-45aa-8510-9b50789ced76",
+       "size": "2XL",
+       "price": 27.94,
+       "available": true
+      },
+      {
+       "id": "3ae966f7-0142-4195-919c-c101f659e10b",
+       "size": "3XL",
+       "price": 29.94,
+       "available": true
+      },
+      {
+       "id": "29787a02-05a9-42e3-8042-d90915d0591b",
+       "size": "4XL",
+       "price": 31.94,
+       "available": true
+      }
+     ],
+     "image": "assets/shop/shirtmoubongo.jpg"
+    }
+   ]
+  },
+  {
+   "key": "hoodiemoubongo",
+   "name": "Hoodiemoubongo",
+   "currency": "USD",
+   "priceMin": 43.35,
+   "priceMax": 47.35,
+   "variants": [
+    {
+     "colour": "Vintage Black",
+     "options": [
+      {
+       "id": "d8e52fcf-efc1-4331-995b-e82af187c926",
+       "size": "S",
+       "price": 43.35,
+       "available": true
+      },
+      {
+       "id": "c76e4275-0ee7-43b8-a52b-b2c74a43f47f",
+       "size": "M",
+       "price": 43.35,
+       "available": true
+      },
+      {
+       "id": "e8d576ae-b369-488f-9287-812ee3dc8772",
+       "size": "L",
+       "price": 43.35,
+       "available": true
+      },
+      {
+       "id": "14b6d947-5a63-499c-a87c-e66be3ec7324",
+       "size": "XL",
+       "price": 43.35,
+       "available": true
+      },
+      {
+       "id": "e70652bb-9a21-4a4d-af2d-67be00210f7f",
+       "size": "2XL",
+       "price": 45.35,
+       "available": true
+      },
+      {
+       "id": "b27d16ba-cac0-45ae-8e47-455f929a692f",
+       "size": "3XL",
+       "price": 47.35,
+       "available": true
+      }
+     ],
+     "image": "assets/shop/hoodiemoubongo.jpg"
+    }
+   ]
+  },
+  {
+   "key": "cafemoubongo",
+   "name": "Cafemoubongo",
+   "currency": "USD",
+   "priceMin": 11.95,
+   "priceMax": 13.5,
+   "variants": [
+    {
+     "colour": "Dark Green",
+     "options": [
+      {
+       "id": "ce719c24-6929-43ed-9007-a1f1df96885e",
+       "size": "11oz",
+       "price": 11.95,
+       "available": true
+      },
+      {
+       "id": "e2fe752a-807e-4ce9-8f18-4106be0b200d",
+       "size": "15oz",
+       "price": 13.5,
+       "available": true
+      }
+     ],
+     "image": "assets/shop/cafemoubongo.jpg"
+    }
+   ]
+  },
+  {
+   "key": "truckermoubongo",
+   "name": "Truckermoubongo",
+   "currency": "USD",
+   "priceMin": 15.95,
+   "priceMax": 15.95,
+   "variants": [
+    {
+     "colour": "Black/Black",
+     "options": [
+      {
+       "id": "bb1b18ca-b244-4db4-84ae-dc83d854532e",
+       "size": "One size",
+       "price": 15.95,
+       "available": true
+      }
+     ],
+     "image": "assets/shop/truckermoubongo.jpg"
+    }
+   ]
+  },
+  {
+   "key": "stickermoubongo",
+   "name": "Stickermoubongo",
+   "currency": "USD",
+   "priceMin": 5.29,
+   "priceMax": 5.69,
+   "variants": [
+    {
+     "colour": "White",
+     "options": [
+      {
+       "id": "ae6d5a71-c357-4dff-8991-3c7f33932be2",
+       "size": "3\" x 3\"",
+       "price": 5.29,
+       "available": true
+      },
+      {
+       "id": "326b01ba-bb27-444e-86e0-ed51482f9d58",
+       "size": "4\" x 4\"",
+       "price": 5.49,
+       "available": true
+      },
+      {
+       "id": "412b1922-009d-413d-98d1-36919bc09f9c",
+       "size": "5.5\" x 5.5\"",
+       "price": 5.69,
+       "available": true
+      }
+     ],
+     "image": "assets/shop/stickermoubongo.jpg"
+    }
+   ]
+  }
+ ]
+}

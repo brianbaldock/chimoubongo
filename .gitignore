@@ -2,3 +2,8 @@ build/
 icon-prompts.txt
 *.bak
 tools/.tilecache/
+
+# Fourthwall storefront token (public by design, but kept out of the repo:
+# GitHub push protection flags the ptkn_ prefix, and credentials do not
+# belong in source regardless). Get it from Settings > For Developers.
+tools/.fourthwall-token

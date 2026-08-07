@@ -47,6 +47,33 @@ The hand-drawn SVG map that used to sit below them was removed on
 directly beneath real survey data, which invited the reader to compare the
 two inside one section. Its legend prose survived as `.gpsnote`.
 
+## The shop (#shop)
+
+Merch is sold through Fourthwall, but the catalog is **baked**, not fetched.
+`tools/bake_shop.py` pulls products from the Storefront API and writes
+`assets/shop.json` plus square JPEGs into `assets/shop/`. The page renders
+from those local files, so the site keeps making **zero third-party requests**
+(verified with `performance.getEntriesByType('resource')`).
+
+`tools/build_shop_section.py` generates the `#shop` markup from that JSON.
+Each card is a plain `<form method="get">` whose `<select name="products">`
+carries the variant UUID as `uuid:1`, submitting straight to Fourthwall's
+`/cart/checkout`. No cart JS, no fetch, works with JavaScript off. The only
+contact with Fourthwall happens after a deliberate click.
+
+The storefront token is public by design (Fourthwall's own docs put it in a
+client-side query string) and lives in `bake_shop.py`. It never reaches the
+shipped HTML. The **Platform** API key is a different, secret credential and
+must never enter this repo.
+
+Two Shirtmoubongo products exist in Fourthwall, identical but for colour;
+`GROUPS` in `bake_shop.py` merges them into one card so the same shirt is not
+listed twice. The `chimoubongo` collection is empty, so the bake reads `all`.
+
+**When the shop changes** (new product, price change, sold out): re-run
+`python3 tools/bake_shop.py`, then commit. Prices are only as fresh as the
+last bake, which is the accepted tradeoff for the no-network promise.
+
 ## Rules for editing
 
 1. **Always edit both `index.html` and `en.html`.** A greedy regex once ate
