@@ -461,12 +461,24 @@ section .wrap>h3:first-of-type{margin-top:0}
 .poster .pull{border-left-color:var(--gold);color:#fff;max-width:var(--measure)}
 ul.sched{list-style:none;padding:0;margin:30px 0 0;max-width:var(--measure);
   border-top:1px solid rgba(255,255,255,.14)}
-ul.sched li{padding:15px 0;font-size:.97rem;line-height:1.62;
-  border-bottom:1px solid rgba(255,255,255,.09);color:rgba(243,236,219,.8);
-  display:grid;grid-template-columns:78px 1fr;gap:18px;align-items:baseline}
-ul.sched li b{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--gold);min-width:0}
-@media(max-width:620px){ul.sched li{grid-template-columns:1fr;gap:4px}}
+/* Hanging indent rather than a grid. The 13h30 entry has a <strong> lead-in,
+   and as a direct child of a grid li that gets blockified into its own grid
+   row no matter what display it is given, which stretched that one row to
+   677px against ~81px for its neighbours. A hanging indent keeps the time in
+   a fixed gutter, wraps continuation lines under it, and does not care how
+   many inline elements the entry contains. */
+ul.sched li{padding:15px 0 15px 96px;text-indent:-96px;
+  font-size:.97rem;line-height:1.62;
+  border-bottom:1px solid rgba(255,255,255,.09);color:rgba(243,236,219,.8)}
+ul.sched li b{display:inline-block;width:78px;margin-right:18px;text-indent:0;
+  vertical-align:baseline;
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold)}
+ul.sched li strong{color:#fff;font-weight:700}
+@media(max-width:620px){
+  ul.sched li{padding-left:0;text-indent:0}
+  ul.sched li b{display:block;width:auto;margin:0 0 4px}
+}
 
 /* ==================================================================
    Lower-half pass
@@ -531,3 +543,20 @@ footer .fnote{max-width:340px;margin:0}
 /* --- section head consistency in the lower half --------------------
    .stamp was floating loose above the sechead; tie them together.   */
 .stamp+.sechead{margin-top:6px}
+
+/* --- Battue restructure -------------------------------------------
+   Measured before: #battue was one 2864px dark slab, 340px of photo
+   then 2524px of body copy reversed out on ink, and the only section
+   on the page with no .sechead. It now follows the same shape as
+   #story: head on paper, narrative, pull quote, full-bleed band, then
+   a compact dark panel carrying only the practical matter.          */
+#battue>.wrap+.band{margin-top:clamp(46px,6vw,84px)}
+#battue>.band+.wrap{margin-top:clamp(46px,6vw,84px)}
+#battue .poster.feature{grid-template-columns:1fr}
+#battue .poster.feature .body{padding:clamp(34px,4.4vw,58px)}
+#battue .poster.feature .when{margin-bottom:8px}
+#battue .poster .lede-note{
+  border-top:1px solid rgba(255,255,255,.14);
+  padding-top:20px;margin-top:26px;
+  color:rgba(243,236,219,.72);max-width:var(--measure);
+}
