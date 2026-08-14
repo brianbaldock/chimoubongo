@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://chimoubongo.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://chimoubongo.com/en.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://chimoubongo.com/village.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/village.html"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en-village.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/village.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chimoubongo.com/en-village.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/village.html"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en-village.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/village.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chimoubongo.com/visiter.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/visiter.html"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/visiter.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chimoubongo.com/en-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/visiter.html"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/visiter.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chimoubongo.com/attractions.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/attractions.html"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en-attractions.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/attractions.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chimoubongo.com/en-attractions.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/attractions.html"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en-attractions.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/attractions.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chimoubongo.com/hangar.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/hangar.html"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en-shop.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/hangar.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://chimoubongo.com/en-shop.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://chimoubongo.com/hangar.html"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://chimoubongo.com/en-shop.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chimoubongo.com/hangar.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>

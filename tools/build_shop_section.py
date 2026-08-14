@@ -25,7 +25,7 @@ with open(os.path.join(ROOT, "assets", "shop.json"), encoding="utf-8") as f:
     SHOP = json.load(f)
 
 COPY = {
-    "index.html": {
+    "fr": {
         "eyebrow": "Le hangar à souvenirs",
         "h2": "Des affaires à rapporter",
         "lede": "Le Bureau vend cinq affaires. C'est pas beaucoup, mais c'est ce qu'y a. "
@@ -41,7 +41,7 @@ COPY = {
         "nav": "Le hangar",
         "foot": "Le hangar",
     },
-    "en.html": {
+    "en": {
         "eyebrow": "The souvenir shed",
         "h2": "Things to take home",
         "lede": "The Bureau sells five things. It is not much, but it is what there is. "
@@ -121,44 +121,30 @@ def build(copy):
 
 
 def replace_shop_section(s, copy):
-    """Insert #shop once, or replace it from the current baked catalog."""
-    anchor = '<section id="visit">'
-    assert anchor in s, "#visit anchor not found"
-    shop = build(copy)
+    """Rebuild the #shop section of a content fragment from the baked catalog.
 
-    if '<section id="shop">' in s:
-        start = s.index('<section id="shop">')
-        end = s.index(anchor, start)
-        s = s[:start] + shop + s[end:]
-    else:
-        s = s.replace(anchor, shop + anchor, 1)
+    Since the 2026-08-14 multi-page split the shop is its own page, so this no
+    longer inserts nav or footer links: tools/build_site.py owns all chrome.
+    The fragment is the section and nothing else, which is why this replaces
+    from '<section id="shop">' to end of string rather than to an anchor.
+    """
+    assert s.startswith('<section id="shop">'), "fragment must be the shop section"
+    out = build(copy)
 
-        # Nav link, placed before Visit so shop sits next to it.
-        nav_anchor = '  <a class="nl" href="#visit">'
-        assert nav_anchor in s, "nav anchor not found"
-        s = s.replace(nav_anchor, f'  <a class="nl" href="#shop">{copy["nav"]}</a>\n{nav_anchor}', 1)
-
-        # Footer link under the Visit column.
-        foot_anchor = '<li><a href="#bureau">'
-        assert foot_anchor in s, "footer anchor not found"
-        i = s.index(foot_anchor)
-        j = s.index("</li>", i) + len("</li>")
-        s = s[:j] + f'\n          <li><a href="#shop">{copy["foot"]}</a></li>' + s[j:]
-
-    assert s.count('<section id="shop">') == 1, "shop section count"
-    assert s.count("<section") == s.count("</section>"), "section balance"
-    assert s.count("<div") == s.count("</div>"), "div balance"
-    assert s.count("<form") == s.count("</form>") == 5, "form count"
-    assert s.count("<select") == s.count("</select>") == 5, "select count"
-    assert "ptkn_" not in s, "storefront token must never reach the page"
-    return s
+    assert out.count('<section id="shop">') == 1, "shop section count"
+    assert out.count("<section") == out.count("</section>"), "section balance"
+    assert out.count("<div") == out.count("</div>"), "div balance"
+    assert out.count("<form") == out.count("</form>") == 5, "form count"
+    assert out.count("<select") == out.count("</select>") == 5, "select count"
+    assert "ptkn_" not in out, "storefront token must never reach the page"
+    return out
 
 
 if __name__ == "__main__":
     for name, copy in COPY.items():
-        path = os.path.join(ROOT, name)
+        path = os.path.join(ROOT, "content", name, "shop.html")
         before = open(path, encoding="utf-8").read()
         after = replace_shop_section(before, copy)
         open(path, "w", encoding="utf-8").write(after)
-        action = "rebuilt" if '<section id="shop">' in before else "inserted"
-        print(f"OK {name}: {action} #shop")
+        print(f"OK content/{name}/shop.html: rebuilt #shop "
+              f"({'unchanged' if after == before else 'CHANGED, rerun tools/build_site.py'})")

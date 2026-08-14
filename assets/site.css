@@ -700,3 +700,107 @@ footer .fnote{max-width:340px;margin:0}
   .good h4{font-size:.98rem}
   .pick button{padding:12px 10px;letter-spacing:.14em}
 }
+
+/* ==================================================================
+   Multi-page pass (2026-08-14)
+   The site was two single-page documents of ~7000px each. It is now
+   five sections per language, so the chrome has to carry the things a
+   single page carried by scroll: where you are, and that there is a
+   shop. Everything below serves one of those two jobs.
+   ================================================================== */
+
+/* --- current page marker in the nav -------------------------------
+   A five-item nav with no state is a list of places you might be. */
+nav a.nl.on{color:var(--pine);border-bottom-color:var(--pine)}
+
+/* --- the merch banner ---------------------------------------------
+   The point of the whole site is the shed. On one long page the shop
+   section was reachable by scrolling; across five pages it needs a
+   standing invitation on every one of them. It sits directly under the
+   sticky nav rather than inside it, so it scrolls away and never eats
+   viewport height on a phone, and it is an <aside> because it is not
+   page navigation.
+
+   Deliberately NOT position:sticky. Two reasons: a second sticky strip
+   under a 62px sticky nav costs ~110px of a 667px phone viewport for
+   the entire visit, and a permanently-pinned ad reads as a pop-up on a
+   site whose whole voice is understated. It is loud once, at the top of
+   every page, then it gets out of the way.                            */
+.shopbar{
+  display:block;background:var(--clay);color:#fff5ec;
+  border-bottom:1px solid rgba(0,0,0,.14);
+}
+.shopbar .wrap{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(12px,2.4vw,26px);flex-wrap:wrap;
+  padding-top:13px;padding-bottom:13px;
+}
+.shopbar .sb-text{
+  font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;
+  line-height:1.45;text-align:center;
+}
+.shopbar .sb-cta{
+  display:inline-flex;align-items:center;gap:9px;flex:none;
+  font-family:var(--sans);font-size:11px;font-weight:800;
+  letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
+  color:var(--clay);background:#fff5ec;
+  padding:9px 18px;border-radius:2px;
+  transition:transform .2s ease,background .2s ease;
+}
+.shopbar .sb-cta:hover{transform:translateY(-1px);background:#fff}
+.shopbar .sb-cta .ar{font-size:14px;line-height:1}
+@media(max-width:540px){
+  .shopbar .wrap{gap:10px;padding-top:11px;padding-bottom:11px}
+  .shopbar .sb-text{font-size:12px}
+}
+
+/* --- product teaser row on the home page ---------------------------
+   Four covers linking into the shed. Not buy forms: the checkout forms
+   live on one page only, so the variant UUIDs have exactly one home and
+   cannot drift between pages.                                         */
+.shoptease{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:clamp(18px,2.6vw,32px);margin-top:clamp(30px,4vw,48px);
+}
+.tease{
+  display:flex;flex-direction:column;text-decoration:none;color:var(--ink);
+  background:var(--paper);border:1px solid var(--line);border-radius:3px;
+  overflow:hidden;transition:transform .25s ease,border-color .25s ease;
+}
+.tease:hover{transform:translateY(-3px);border-color:var(--moss)}
+.tease figure{margin:0;background:var(--paper2);overflow:hidden}
+.tease figure img{
+  display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:contain;
+}
+.tease .tname{
+  font-family:var(--sans);font-size:.95rem;font-weight:700;
+  padding:16px 16px 2px;
+}
+.tease .tprice{
+  font-family:var(--sans);font-size:.76rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);padding:0 16px 18px;
+}
+
+/* --- card headings that are links ---------------------------------- */
+.card h4 a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.card h4 a:hover{color:var(--clay);border-bottom-color:var(--clay)}
+.dark .signoff a{color:#e8c98a}
+
+/* --- utilities that replace the last inline style attributes --------
+   Pin offsets and margin-top:24px used to be style="" attributes. The
+   verify gate now forbids inline styles anywhere, not just below
+   #bureau, so they need real rules. */
+.card.spaced{margin-top:26px}
+.pin{left:48.77%;top:52.29%}
+.pin.centred{left:50%;top:50.07%}
+.fixedband.grove{background-image:url('assets/grove.jpg')}
+
+/* --- per-page spacing ---------------------------------------------
+   With sections split across pages, the first section on a page sits
+   directly under the merch banner and does not need a full --gap of
+   air above it on top of the banner's own padding. */
+.shopbar+section:not(.hero){padding-top:clamp(44px,6vw,84px)}
+#charter-teaser{padding:clamp(64px,8vw,112px) 0}
+#charter-teaser .pull{max-width:760px}
+#gates .cards.plain .card{min-height:auto}
+#doing .cards.plain .card{min-height:0}

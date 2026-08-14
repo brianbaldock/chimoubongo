@@ -13,7 +13,9 @@ css = (ROOT / "assets" / "site.css").read_bytes()
 version = hashlib.sha256(css).hexdigest()[:12]
 expected = f"assets/site.css?v={version}"
 
-for page in ("index.html", "en.html"):
+for page in ("index.html", "en.html", "village.html", "en-village.html",
+             "visiter.html", "en-visit.html", "attractions.html",
+             "en-attractions.html", "hangar.html", "en-shop.html"):
     text = (ROOT / page).read_text(encoding="utf-8")
     match = re.search(r'<link rel="stylesheet" href="([^"]+)">', text)
     assert match, f"{page}: stylesheet link missing"
@@ -21,4 +23,4 @@ for page in ("index.html", "en.html"):
         f"{page}: stale stylesheet version {match.group(1)!r}; expected {expected!r}"
     )
 
-print(f"OK both pages cache-bust CSS with {version}")
+print(f"OK all ten pages cache-bust CSS with {version}")

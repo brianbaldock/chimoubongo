@@ -32,10 +32,10 @@ for name in EXPECTED:
             f"{name}: transparent source did not flatten onto --paper2: {corner}"
         )
 
-for page in ("index.html", "en.html"):
+for page in ("hangar.html", "en-shop.html"):
     text = (ROOT / page).read_text(encoding="utf-8")
     start = text.index('<section id="shop">')
-    end = text.index('<section id="visit">', start)
+    end = text.index('</section>', start)
     section = text[start:end]
     assert section.count('<div class="good">') == 5, f"{page}: expected five cards"
     assert section.count('width="900" height="1200"') == 5, f"{page}: stale image dimensions"
