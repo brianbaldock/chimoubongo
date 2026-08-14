@@ -209,6 +209,7 @@ def chrome_top(lang: str, page: str, version: str) -> str:
 <link rel="stylesheet" href="assets/site.css?v={version}">
 <script type="application/ld+json">{jsonld}</script>
 <noscript><style>.rv{{opacity:1!important;transform:none!important}}</style></noscript>
+<script data-goatcounter="https://chimoubongo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
