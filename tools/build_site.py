@@ -200,12 +200,15 @@ def chrome_top(lang: str, page: str, version: str) -> str:
 <meta property="og:locale:alternate" content="{L['og_locale_alt']}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{og}">
-<meta property="og:image" content="{SITE}assets/logo.png">
+<meta property="og:image" content="{SITE}assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="{L['brand_alt']}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{og}">
-<meta name="twitter:image" content="{SITE}assets/logo.png">
+<meta name="twitter:image" content="{SITE}assets/og-cover.jpg">
 <link rel="stylesheet" href="assets/site.css?v={version}">
 <script type="application/ld+json">{jsonld}</script>
 <noscript><style>.rv{{opacity:1!important;transform:none!important}}</style></noscript>

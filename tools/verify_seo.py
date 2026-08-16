@@ -105,6 +105,34 @@ def check_page(name: str, lang: str) -> None:
             err(f"{name}: og:image missing on disk: {rel}")
         elif (ROOT / rel).stat().st_size == 0:
             err(f"{name}: og:image is zero bytes: {rel}")
+        else:
+            # A social card must actually be near 1.91:1 and under 1MB. A square
+            # logo technically "exists on disk" and still previews badly, which
+            # is the exact defect this check exists to catch.
+            size = (ROOT / rel).stat().st_size
+            if size > 1_000_000:
+                err(f"{name}: og:image too large for a social card: {rel} "
+                    f"({size} bytes)")
+            try:
+                from PIL import Image
+                with Image.open(ROOT / rel) as im:
+                    w, h = im.size
+                if not (600 <= w <= 2400 and abs((w / h) - 1.91) <= 0.20):
+                    err(f"{name}: og:image is not a ~1.91:1 social card: "
+                        f"{rel} ({w}x{h})")
+            except ImportError:
+                # fail closed: an unavailable check is not a passing check
+                err(f"{name}: cannot verify og:image dimensions (Pillow missing)")
+        # declared dimensions, when present, must match the real file
+        for prop, want in (("og:image:width", "1200"), ("og:image:height", "630")):
+            got = meta(html, "property", prop)
+            if got is not None and got != want:
+                err(f"{name}: {prop} is {got}, expected {want}")
+
+    # twitter:image must match og:image; a stale one previews the wrong art
+    twimg = meta(html, "name", "twitter:image")
+    if twimg != ogimg:
+        err(f"{name}: twitter:image ({twimg}) != og:image ({ogimg})")
 
     # JSON-LD must parse and describe THIS page
     blocks = re.findall(
